@@ -1,4 +1,5 @@
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+body {
+  background-color: rgb(45,45,45) !important;
+  /* background-size: cover !important;
+  background-attachment: fixed !important; */
 }
