@@ -1,5 +1,38 @@
 body {
-  background-color: rgb(45,45,45) !important;
+  background-color: rgb(20,20,20) !important;
   /* background-size: cover !important;
   background-attachment: fixed !important; */
+}
+
+#header-title{
+  font-size: 2.5em;
+}
+
+.menu-item{
+  font-size: 1.3em;
+}
+
+.non-header-content{
+  top: 50%;
+}
+
+#page-grid{
+  min-height: 100vh;
+}
+
+div.thirteen.wide.column{
+  padding-left: 0px !important;
+}
+
+
+
+#mapCoordinateDisplay{
+  display: inline-block;
+  opacity: 0.5;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  margin-left: 1%;
+  margin-top: 1%;
+  padding: 1%;
 }

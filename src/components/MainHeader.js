@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Sidebar} from 'semantic-ui-react'
+import { Menu, Sidebar } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
 
 export default class MainHeader extends Component {
@@ -15,30 +15,44 @@ export default class MainHeader extends Component {
   render() {
     const { activeItem } = this.state
     return (
-      <Sidebar as={Menu} vertical pointing visible size='large' id="main-header">
+      <Sidebar as={Menu} visible vertical borderless id="main-header">
         <Menu.Item id="header-title" header as={NavLink} exact to="/"
-          name="pending title"
-          active={activeItem === 'pending title'}
+          name="PENDING TITLE"
+          active={activeItem === 'PENDING TITLE'}
           onClick={this.handleItemClick}
         />
-        <Menu.Item as={ NavLink } to="/about"
-          name='about'
-          active={activeItem === 'about'}
+        <Menu.Item />
+        <Menu.Item />
+        <Menu.Item />
+        <Menu.Item />
+        <Menu.Item className="menu-item" as={ NavLink } to="/about"
+          name='ABOUT'
+          active={activeItem === 'ABOUT'}
           onClick={this.handleItemClick}
         />
         <Menu.Item as={ NavLink } to="/map"
-          name='see your map'
-          active={activeItem === 'see your map'}
+          className="menu-item"
+          name='SEE YOUR MAP'
+          active={activeItem === 'SEE YOUR MAP'}
           onClick={this.handleItemClick}
         />
         <Menu.Item as={ NavLink } to="/liked_trips"
-          name='liked trips'
-          active={activeItem === 'liked trips'}
+          className="menu-item"
+          name='SEE ALL TRIPS'
+          active={activeItem === 'SEE ALL TRIPS'}
           onClick={this.handleItemClick}
         />
         <Menu.Item as={ NavLink } to="/trips_form"
-          name='post a trip'
-          active={activeItem === 'post a trip'}
+          className="menu-item"
+          name='POST A TRIP'
+          active={activeItem === 'POST A TRIP'}
+          onClick={this.handleItemClick}
+        />
+        <Menu.Item as={ NavLink } to="/login"
+          position="bottom"
+          className="menu-item"
+          name='LOG IN'
+          active={activeItem === 'LOG IN'}
           onClick={this.handleItemClick}
         />
       </Sidebar>
