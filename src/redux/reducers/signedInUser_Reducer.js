@@ -2,8 +2,7 @@ function signedInUser(state = [], action){
   switch(action.type){
     case 'FETCHING_SIGNEDINUSER':
       return state
-    case "ADD_FETCHED
-  }_SIGNEDINUSER":
+    case "ADD_FETCHED_SIGNEDINUSER":
       return [action.payload]
     case "LOGOUT":
       return []

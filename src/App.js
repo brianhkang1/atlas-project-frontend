@@ -21,15 +21,15 @@ class App extends Component {
     return (
       <Grid id="page-grid" columns={2}>
         <Grid.Column className="mainheader-container" width={3}>
-          <Route path="/" render={() => <MainHeader />}/>
+          <Route path="/" render={(props) => <MainHeader router={props}/>}/>
         </Grid.Column>
         <Grid.Column width={13}>
           <Route exact path="/about" render={() => <About />}/>
           <Route exact path="/map" render={() => <MapContainer />}/>
         {this.props.signedInUser.length === 0 ?
         <React.Fragment>
-          <Route exact path="/login" render={(props) => <Login />} />
-          <Route exact path="/signup" render={() => <Signup/>}/>
+          <Route exact path="/login" render={(props) => <Login router={props} />} />
+          <Route exact path="/signup" render={(props) => <Signup router={props}/>}/>
         </React.Fragment> : null
         }
         </Grid.Column>

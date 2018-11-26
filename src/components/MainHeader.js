@@ -12,6 +12,11 @@ class MainHeader extends Component {
     }
   }
 
+  handleLogoutClick = (event, routerProps) => {
+    this.props.logout()
+    routerProps.history.push("/")
+  }
+
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
@@ -72,7 +77,7 @@ class MainHeader extends Component {
           align="right"
           name='LOG OUT'
           active={activeItem === 'LOG OUT'}
-          onClick={this.props.logout}
+          onClick={(event) => this.handleLogoutClick(event, this.props.router)}
           />
         }
       </Sidebar>

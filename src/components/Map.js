@@ -8,8 +8,8 @@ class Map extends React.Component {
     super(props)
     this.state = {
       viewport: {
-        width: 1175,
-        height: 770,
+        width: "100%",
+        height: "100vh",
         latitude: 44.5739,
         longitude: 7.7952,
         zoom: 1.19
@@ -29,7 +29,7 @@ class Map extends React.Component {
         <div id="mapCoordinateDisplay">
           <div>{`Latitude: ${this.state.viewport.latitude.toFixed(4)} // Longitude: ${this.state.viewport.longitude.toFixed(4)} // Zoom: ${this.state.viewport.zoom.toFixed(2)}`}</div>
         </div>
-        <div style={{position: 'absolute', right: 0, top: 0, padding: 10}}>
+        <div style={{position: 'absolute', right: 0, top: 0, padding: 25}}>
          <NavigationControl onViewportChange={(viewport) => this.setState({viewport})} showCompass={false} />
        </div>
       </ReactMapGL>

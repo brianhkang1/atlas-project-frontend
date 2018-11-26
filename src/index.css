@@ -1,5 +1,5 @@
 body {
-  background-image: url('./background-pics/background-1.jpg') !important;
+  background: url('./background-pics/background-1.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
 }
@@ -22,9 +22,13 @@ body {
 
 div.thirteen.wide.column{
   padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 
-
+.mainheader-container{
+  padding-right: 0px !important;
+  max-width: 265px;
+}
 
 #mapCoordinateDisplay{
   display: inline-block;
@@ -42,4 +46,11 @@ div.thirteen.wide.column{
   position: absolute;
   left: 35%;
   top: 40%;
+}
+
+.signup-login-background{
+  min-height: 100vh;
+  background: url('./background-pics/background-2.jpg') !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import {Segment, Form, Button} from 'semantic-ui-react'
-
+import { connect } from 'react-redux'
+import { signInUser } from '../redux/actions/signInUser'
 
 class Signup extends React.Component {
   constructor(props){
@@ -46,14 +47,13 @@ class Signup extends React.Component {
     }).then(res => res.json())
       .then(json => {
         localStorage.setItem("token", json.jwt)
-        this.props.fetchAllUsers()
         this.props.signInUser(json.user, this.props.router)
       })
     }
 
   render(){
     return(
-      <div className="centered">
+      <div className="centered signup-login-background">
       <Segment id="signup-form">
         <Form size='large' onSubmit={(event) => this.handleSubmit(event, this.props.router)}>
           <Form.Input required icon='user' iconPosition='left' name="username" placeholder='create a username' onChange={this.handleChange} />
@@ -68,4 +68,14 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup
+const mapStateToProps = (state) => {
+  return {signedInUser: state.signedInUser}
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signInUser: (userInfo) => dispatch(signInUser(userInfo))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup)

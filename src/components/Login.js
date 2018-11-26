@@ -37,15 +37,19 @@ class Login extends React.Component {
       body: JSON.stringify(body)
     }).then(res => res.json())
       .then(json => {
-        debugger
-        localStorage.setItem("token", json.jwt)
-        this.props.signInUser(json.user)
+        if(json.message === "Invalid username or password"){
+          alert(json.message)
+        } else {
+          localStorage.setItem("token", json.jwt)
+          this.props.signInUser(json.user)
+          routerProps.history.push('/map')
+        }
       })
     }
 
   render(){
     return(
-      <div>
+      <div className="signup-login-background">
       <Segment id="login-form">
         <Form size='large' onSubmit={(event) => this.handleSubmit(event, this.props.router)}>
           <Form.Input required fluid icon='user' iconPosition='left' name="username" placeholder='username' onChange={this.handleChange} />
@@ -58,12 +62,10 @@ class Login extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {signedInUser: state.signedInUser}
-}
-
 const mapDispatchToProps = (dispatch) => {
-  return {signInUser: () => dispatch(signInUser())}
+  return {
+    signInUser: (userInfo) => dispatch(signInUser(userInfo))
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(null, mapDispatchToProps)(Login)
