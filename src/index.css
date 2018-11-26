@@ -4,6 +4,13 @@ body {
   background-attachment: fixed !important;
 }
 
+.signup-login-background{
+  min-height: 100vh;
+  background: url('./background-pics/background-2.jpg') !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+}
+
 #header-title{
   font-size: 2em;
 }
@@ -48,9 +55,16 @@ div.thirteen.wide.column{
   top: 40%;
 }
 
-.signup-login-background{
-  min-height: 100vh;
-  background: url('./background-pics/background-2.jpg') !important;
-  background-size: cover !important;
-  background-attachment: fixed !important;
+#about{
+  max-width: 60%;
+  position: absolute;
+  left: 20%;
+  top: 33%;
+}
+
+#trip-form{
+  min-width: 70%;
+  position: absolute;
+  left: 15%;
+  top: 20%
 }

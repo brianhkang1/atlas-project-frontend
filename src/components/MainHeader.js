@@ -13,6 +13,7 @@ class MainHeader extends Component {
   }
 
   handleLogoutClick = (event, routerProps) => {
+    localStorage.clear()
     this.props.logout()
     routerProps.history.push("/")
   }
@@ -29,8 +30,6 @@ class MainHeader extends Component {
           active={activeItem === 'PENDING TITLE'}
           onClick={this.handleItemClick}
         />
-        <Menu.Item />
-        <Menu.Item />
         <Menu.Item />
         <Menu.Item />
         <Menu.Item className="menu-item" as={ NavLink } to="/about"
@@ -51,7 +50,7 @@ class MainHeader extends Component {
           active={activeItem === 'SEE ALL TRIPS'}
           onClick={this.handleItemClick}
         />
-        <Menu.Item className="menu-item" as={ NavLink } to="/trips_form"
+        <Menu.Item className="menu-item" as={ NavLink } to="/form"
           align='right'
           name='POST A TRIP'
           active={activeItem === 'POST A TRIP'}

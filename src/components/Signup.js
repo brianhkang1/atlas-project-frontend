@@ -25,11 +25,11 @@ class Signup extends React.Component {
     if (this.state.password !== this.state.password_confirm) {
       alert("Password and Password Confirmation do not match")
     } else {
-      this.postNewUser()
+      this.postNewUser(routerProps)
     }
   }
 
-  postNewUser = () => {
+  postNewUser = (routerProps) => {
     let body = {
       user: {
         username: this.state.username,
@@ -47,13 +47,14 @@ class Signup extends React.Component {
     }).then(res => res.json())
       .then(json => {
         localStorage.setItem("token", json.jwt)
-        this.props.signInUser(json.user, this.props.router)
+        this.props.signInUser(json.user)
+        routerProps.history.push("/map")
       })
     }
 
   render(){
     return(
-      <div className="centered signup-login-background">
+      <div className="signup-login-background">
       <Segment id="signup-form">
         <Form size='large' onSubmit={(event) => this.handleSubmit(event, this.props.router)}>
           <Form.Input required icon='user' iconPosition='left' name="username" placeholder='create a username' onChange={this.handleChange} />
@@ -68,14 +69,10 @@ class Signup extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {signedInUser: state.signedInUser}
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
     signInUser: (userInfo) => dispatch(signInUser(userInfo))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup)
+export default connect(null, mapDispatchToProps)(Signup)

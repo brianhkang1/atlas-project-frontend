@@ -5,6 +5,7 @@ import About from './components/About'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import MapContainer from './containers/MapContainer'
+import TripFormContainer from './containers/TripFormContainer'
 import { Grid } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { fetchSignedInUser } from './redux/actions/fetch_signedInUser'
@@ -26,6 +27,7 @@ class App extends Component {
         <Grid.Column width={13}>
           <Route exact path="/about" render={() => <About />}/>
           <Route exact path="/map" render={() => <MapContainer />}/>
+          <Route exact path="/form" render={() => <TripFormContainer/>}/>
         {this.props.signedInUser.length === 0 ?
         <React.Fragment>
           <Route exact path="/login" render={(props) => <Login router={props} />} />
