@@ -1,8 +1,8 @@
 function tripsReducer(state = [], action){
   switch(action.type){
-    case 'LOADING_TRIPS':
+    case 'FETCHING_TRIPS':
       return state
-    case "FETCH_TRIPS":
+    case "ADD_FETCHED_TRIPS":
       return [...action.payload]
     default:
       return state

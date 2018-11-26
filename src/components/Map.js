@@ -17,12 +17,11 @@ class Map extends React.Component {
     }
   }
 
-
   render() {
     return (
       <ReactMapGL
         {...this.state.viewport}
-        mapStyle="mapbox://styles/mapbox/dark-v9"
+        mapStyle="mapbox://styles/mapbox/light-v9"
         mapboxApiAccessToken={TOKEN}
         onViewportChange={(viewport) => this.setState({viewport})}
         minZoom={1.19}
