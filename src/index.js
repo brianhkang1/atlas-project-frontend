@@ -5,6 +5,8 @@ import './index.css';
 import 'semantic-ui-css/semantic.min.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom'
+
+//redux plumbing
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'

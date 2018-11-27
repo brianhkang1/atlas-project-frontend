@@ -9,8 +9,7 @@ class TripForm extends React.Component {
       time: "",
       cost: "",
       summary: "",
-      itinerary_count: [1],
-      itinerary: [],
+      itinerary: [""],
       image: ""
     }
   }
@@ -28,13 +27,14 @@ class TripForm extends React.Component {
   // }
 
   handleAddItinerary = () => {
-    let arr = [...this.state.itinerary_count]
-    arr.push(parseInt(arr.slice(-1).join()) + 1)
-    this.setState({itinerary_count: arr})
+    let arr = [...this.state.itinerary, ""]
+    this.setState({itinerary: arr})
   }
 
-  handleDeleteItinerary = (index) => {
-    debugger
+  handleDeleteItinerary = () => {
+    let arr = [...this.state.itinerary]
+    arr.splice(arr.length-1, 1)
+    this.setState({itinerary: arr})
   }
 
   handleItineraryChange = (index, newValue) => {
@@ -43,33 +43,33 @@ class TripForm extends React.Component {
     this.setState({itinerary: updatedArray});
   }
 
-  handleSubmit = (event, routerProps) => {
-    event.preventDefault()
+  // handleSubmit = (event, routerProps) => {
+  //   event.preventDefault()
+  //
+  //   let formData = new FormData()
+  //   formData.append("name", this.state.name)
+  //   formData.append("time", this.state.time)
+  //   formData.append("cost", this.state.cost)
+  //   formData.append("summary", this.state.summary)
+  //   formData.append("ingredients", this.state.ingredients.join("&&"))
+  //   formData.append("instructions", this.state.instructions.join("&&"))
+  //   formData.append("user_id", this.props.signedInUser.id)
+  //   formData.append("image", this.state.image, this.state.image.name)
+  //
+  //   fetch(`http://localhost:3000/api/v1/trips`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Authorization": `Bearer ${localStorage.getItem("token")}`
+  //     },
+  //     body: formData
+  //   }).then(res => res.json()).then(json => {
+  //     // this.props.fetchAllRecipes()
+  //     routerProps.history.push(`/trips/${json.id}`)})
+  //   }
 
-    let formData = new FormData()
-    formData.append("name", this.state.name)
-    formData.append("time", this.state.time)
-    formData.append("cost", this.state.cost)
-    formData.append("summary", this.state.summary)
-    formData.append("ingredients", this.state.ingredients.join("&&"))
-    formData.append("instructions", this.state.instructions.join("&&"))
-    formData.append("user_id", this.props.signedInUser.id)
-    formData.append("image", this.state.image, this.state.image.name)
-
-    fetch(`http://localhost:3000/api/v1/trips`, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`
-      },
-      body: formData
-    }).then(res => res.json()).then(json => {
-      // this.props.fetchAllRecipes()
-      routerProps.history.push(`/trips/${json.id}`)})
-    }
-
-  handleImageUpload = (event) => {
-    this.setState({[event.target.name]: event.target.files[0]})
-  }
+  // handleImageUpload = (event) => {
+  //   this.setState({[event.target.name]: event.target.files[0]})
+  // }
 
   render(){
     return(
@@ -79,19 +79,21 @@ class TripForm extends React.Component {
           <Segment>
             <Form.Field>
               <label>Choose a country</label>
-              <input list="countries" name="country" onChange={this.handleChange}/>
+              <input required list="countries" name="country" onChange={this.handleChange}/>
               <datalist id="countries">
                 {this.props.countryList.map(country => <option key={country.name} value={country.name} />)}
               </datalist>
             </Form.Field>
             <Form.TextArea required label="Summary of your trip" name="summary" onChange={this.handleChange} />
             <Form.Field>
-              <label><Icon circular id="add-button" onClick={this.handleAddItinerary} name="plus"/>List Itinerary</label>
-                {this.state.itinerary_count.map((itinerary, index) =>
-                  <Segment>
-                  <Icon circular id="delete-button" onClick={(index) => this.handleDeleteItinerary(index)} name="minus"/>
-                  <textarea key={itinerary} rows="2" placeholder={"Day "+ (index+1) + " itinerary"}
-                  onChange={e => this.handleItineraryChange(index, e.target.value)} />
+              <span>
+                <label><Icon circular id="add-button" onClick={this.handleAddItinerary} name="plus"/>Add another itinerary day </label>
+                <label><Icon circular id="delete-button" onClick={this.handleDeleteItinerary} name="minus"/>Delete last itinerary day</label>
+              </span>
+                {this.state.itinerary.map((day, index) =>
+                  <Segment key={index}>
+                    <textarea required rows="2" placeholder={"Day "+ (index+1) + " itinerary"}
+                    onChange={e => this.handleItineraryChange(index, e.target.value)} />
                   </Segment>
                 )}
             </Form.Field>

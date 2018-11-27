@@ -18,7 +18,7 @@ class MainHeader extends Component {
     routerProps.history.push("/")
   }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (event, { name }) => this.setState({ activeItem: name })
 
   render() {
     const { activeItem } = this.state
@@ -44,10 +44,10 @@ class MainHeader extends Component {
           active={activeItem === 'SEE YOUR MAP'}
           onClick={this.handleItemClick}
         />
-        <Menu.Item className="menu-item" as={ NavLink } to="/liked_trips"
+        <Menu.Item className="menu-item" as={ NavLink } to="/trips"
           align="right"
-          name='SEE ALL TRIPS'
-          active={activeItem === 'SEE ALL TRIPS'}
+          name='SEARCH TRIPS'
+          active={activeItem === 'SEARCH TRIPS'}
           onClick={this.handleItemClick}
         />
         <Menu.Item className="menu-item" as={ NavLink } to="/form"

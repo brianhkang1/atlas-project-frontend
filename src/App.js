@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, withRouter }  from 'react-router-dom'
 import MainHeader from './components/MainHeader'
+import Home from './components/Home'
 import About from './components/About'
 import Login from './components/Login'
 import Signup from './components/Signup'
@@ -25,8 +26,9 @@ class App extends Component {
           <Route path="/" render={(props) => <MainHeader router={props}/>}/>
         </Grid.Column>
         <Grid.Column width={13}>
-          <Route exact path="/about" render={() => <About />}/>
-          <Route exact path="/map" render={() => <MapContainer />}/>
+          <Route exact path="/" render={() => <Home/>}/>
+          <Route exact path="/about" render={() => <About/>}/>
+          <Route exact path="/map" render={() => <MapContainer/>}/>
           <Route exact path="/form" render={() => <TripFormContainer/>}/>
         {this.props.signedInUser.length === 0 ?
         <React.Fragment>
