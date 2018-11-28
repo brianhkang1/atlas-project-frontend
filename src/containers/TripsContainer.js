@@ -24,7 +24,7 @@ class TripsContainer extends React.Component{
   }
 
   filteredTrips = () => {
-    let filteredTripList = this.props.tripsList.filter(trip => trip.location.includes(this.state.searchInput))
+    let filteredTripList = this.props.tripsList.filter(trip => trip.country_name.includes(this.state.searchInput))
     return filteredTripList.map(trip => {
       return <Trip key={trip.id} trip={trip} />
     })

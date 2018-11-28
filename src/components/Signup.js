@@ -48,7 +48,7 @@ class Signup extends React.Component {
       .then(json => {
         localStorage.setItem("token", json.jwt)
         this.props.signInUser(json.user)
-        routerProps.history.push("/map")
+        routerProps.history.push("/trips")
       })
     }
 

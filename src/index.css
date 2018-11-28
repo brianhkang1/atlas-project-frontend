@@ -6,14 +6,14 @@
 } */
 
 #home-page, #about-page{
-  min-height: 100vh;
+  min-height: 102vh;
   background: url('./background-pics/background-2.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
 }
 
 #trips-page{
-  min-height: 100vh;
+  min-height: 102vh;
   background: url('./background-pics/background-1.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
@@ -27,7 +27,7 @@
 }
 
 #signup-page, #login-page{
-  min-height: 100vh;
+  min-height: 102vh;
   background: url('./background-pics/background-3.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
@@ -110,6 +110,5 @@ div.thirteen.wide.column{
 }
 
 #trips-grid{
-  position: absolute;
-  top: 10%;
+  padding: 5%;
 }

@@ -1,6 +1,8 @@
 import React from 'react'
-import {Segment, Form, Button, Icon} from 'semantic-ui-react'
+import {Segment, Form, Button, Icon, Input} from 'semantic-ui-react'
 import ImageUploader from 'react-images-upload'
+
+const TRIPS_URL = `http://localhost:3000/api/v1/trips`
 
 class TripForm extends React.Component {
   constructor(props){
@@ -9,6 +11,7 @@ class TripForm extends React.Component {
       country: "",
       summary: "",
       itinerary: [""],
+      locations: [],
       pictures: []
     }
   }
@@ -42,8 +45,14 @@ class TripForm extends React.Component {
 
   handleItineraryChange = (index, newValue) => {
     const updatedArray = [...this.state.itinerary];
-    updatedArray[index] = newValue;
+    updatedArray[index] = newValue
     this.setState({itinerary: updatedArray});
+  }
+
+  handleLocationChange = (index, newValue) => {
+    const updatedArray = [...this.state.locations];
+    updatedArray[index] = newValue
+    this.setState({locations: updatedArray});
   }
 
   handleSubmit = (event, routerProps) => {
@@ -54,18 +63,29 @@ class TripForm extends React.Component {
   }
 
   postToTrips = (routerProps) => {
+    let loc = [...this.state.locations]
+    for (let i = 0; i < loc.length - 1; i++){
+      loc[i] = loc[i] + "&&&"
+    }
+
+    let iti = [...this.state.itinerary]
+    for (let i = 0; i < iti.length - 1; i++){
+      iti[i] = iti[i] + "&&&"
+    }
+
     let formData = new FormData()
     formData.append("creator_id", this.props.signedInUser[0].id)
-    formData.append("location", this.state.country.toLowerCase())
+    formData.append("country_name", this.state.country.toLowerCase())
     formData.append("summary", this.state.summary)
     // formData.append("photos", this.state.pictures)
     this.state.pictures.forEach( (photo, index) => {
       formData.append(`photo-${index+1}`, photo)
     })
     formData.append("photoCount", this.state.pictures.length)
-    formData.append("itinerary", this.state.itinerary)
+    formData.append("itinerary", iti)
+    formData.append("locations", loc)
 
-    fetch(`http://localhost:3000/api/v1/trips`, {
+    fetch(TRIPS_URL, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -102,8 +122,9 @@ class TripForm extends React.Component {
               </span>
                 {this.state.itinerary.map((day, index) =>
                   <Segment key={index}>
+                    <Input required label="Location: " style={{width:200}} onChange={(event) => this.handleLocationChange(index, event.target.value)}/>
                     <textarea required rows="2" placeholder={"Day "+ (index+1) + " itinerary"}
-                    onChange={e => this.handleItineraryChange(index, e.target.value)} />
+                    onChange={(event) => this.handleItineraryChange(index, event.target.value)} />
                   </Segment>
                 )}
             </Form.Field>
