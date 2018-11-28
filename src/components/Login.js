@@ -49,7 +49,7 @@ class Login extends React.Component {
 
   render(){
     return(
-      <div className="signup-login-background">
+      <div id="login-page">
       <Segment id="login-form">
         <Form size='large' onSubmit={(event) => this.handleSubmit(event, this.props.router)}>
           <Form.Input required fluid icon='user' iconPosition='left' name="username" placeholder='username' onChange={this.handleChange} />

@@ -1,16 +1,13 @@
 import React from 'react'
-import {Container, Segment} from 'semantic-ui-react'
 
-class About extends React.Component{
+class Home extends React.Component{
   render(){
     return(
       <div id="home-page">
-        <Segment id="about">
-            <h1>HELLO</h1>
-        </Segment>
+        <h1 id="home-title">HELLO</h1>
       </div>
     )
   }
 }
 
-export default About
+export default Home

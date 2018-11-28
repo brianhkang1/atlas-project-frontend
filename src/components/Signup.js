@@ -54,7 +54,7 @@ class Signup extends React.Component {
 
   render(){
     return(
-      <div className="signup-login-background">
+      <div id="signup-page">
       <Segment id="signup-form">
         <Form size='large' onSubmit={(event) => this.handleSubmit(event, this.props.router)}>
           <Form.Input required icon='user' iconPosition='left' name="username" placeholder='create a username' onChange={this.handleChange} />

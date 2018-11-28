@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Menu, Sidebar } from 'semantic-ui-react'
-import { NavLink, withRouter } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../redux/actions/logout'
 
@@ -92,4 +92,4 @@ const mapDispatchToProps = (dispatch) => {
   return {logout: () => dispatch(logout())}
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainHeader))
+export default connect(mapStateToProps, mapDispatchToProps)(MainHeader)

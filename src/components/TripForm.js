@@ -1,17 +1,20 @@
 import React from 'react'
 import {Segment, Form, Button, Icon} from 'semantic-ui-react'
+import ImageUploader from 'react-images-upload'
 
 class TripForm extends React.Component {
   constructor(props){
     super(props)
     this.state = {
       country: "",
-      time: "",
-      cost: "",
       summary: "",
       itinerary: [""],
-      image: ""
+      pictures: []
     }
+  }
+
+  onDrop = (picture) => {
+    this.setState({pictures: this.state.pictures.concat(picture)})
   }
 
   handleChange = (event) => {
@@ -43,38 +46,45 @@ class TripForm extends React.Component {
     this.setState({itinerary: updatedArray});
   }
 
-  // handleSubmit = (event, routerProps) => {
-  //   event.preventDefault()
-  //
-  //   let formData = new FormData()
-  //   formData.append("name", this.state.name)
-  //   formData.append("time", this.state.time)
-  //   formData.append("cost", this.state.cost)
-  //   formData.append("summary", this.state.summary)
-  //   formData.append("ingredients", this.state.ingredients.join("&&"))
-  //   formData.append("instructions", this.state.instructions.join("&&"))
-  //   formData.append("user_id", this.props.signedInUser.id)
-  //   formData.append("image", this.state.image, this.state.image.name)
-  //
-  //   fetch(`http://localhost:3000/api/v1/trips`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Authorization": `Bearer ${localStorage.getItem("token")}`
-  //     },
-  //     body: formData
-  //   }).then(res => res.json()).then(json => {
-  //     // this.props.fetchAllRecipes()
-  //     routerProps.history.push(`/trips/${json.id}`)})
-  //   }
+  handleSubmit = (event, routerProps) => {
+    event.preventDefault()
+    if(this.props.countryList.find(country => country.name.toLowerCase() === this.state.country.toLowerCase())){
+      this.postToTrips(routerProps)
+    } else {alert("Please choose a valid country")}
+  }
 
-  // handleImageUpload = (event) => {
-  //   this.setState({[event.target.name]: event.target.files[0]})
-  // }
+  postToTrips = (routerProps) => {
+    let formData = new FormData()
+    formData.append("creator_id", this.props.signedInUser[0].id)
+    formData.append("location", this.state.country.toLowerCase())
+    formData.append("summary", this.state.summary)
+    // formData.append("photos", this.state.pictures)
+    this.state.pictures.forEach( (photo, index) => {
+      formData.append(`photo-${index+1}`, photo)
+    })
+    formData.append("photoCount", this.state.pictures.length)
+    formData.append("itinerary", this.state.itinerary)
+
+    fetch(`http://localhost:3000/api/v1/trips`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+      },
+      body: formData
+    }).then(res => res.json()).then(json => {
+      // this.props.fetchAllRecipes()
+      routerProps.history.push(`/trips/${json.id}`)})
+  }
 
   render(){
     return(
+      <div id="tripform-page">
       <div id="trip-form">
-      {this.props.signedInUser ?
+      {this.props.signedInUser.length === 0 ?
+        <Segment>
+          <p className="normal-text">You must be signed in to post a trip.</p>
+        </Segment>
+        :
         <Form onSubmit={(event) => this.handleSubmit(event, this.props.router)}>
           <Segment>
             <Form.Field>
@@ -97,12 +107,14 @@ class TripForm extends React.Component {
                   </Segment>
                 )}
             </Form.Field>
-            <Form.Input required fluid label="Upload image(s) of your trip" id="upload-image" type="file" name="image" accept="image/*" onChange={this.handleImageUpload}/>
-            <Button color="blue" fluid >Share</Button>
+            <Segment>
+              <ImageUploader withIcon={true} withLabel={false} withPreview={true} buttonText='Upload image(s) of your trip' onChange={this.onDrop} imgExtension={['.jpg', '.png']}/>
+            </Segment>
+            <Button color="blue" fluid onClick={(event) => this.handleSubmit(event, this.props.router)}>Share</Button>
           </Segment>
         </Form>
-      : <Segment><p className="normal-text">You must be signed in to post a trip.</p></Segment>
       }
+      </div>
       </div>
     )
   }

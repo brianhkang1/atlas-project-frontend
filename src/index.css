@@ -1,11 +1,32 @@
-#home-page{
+/* body{
+  min-height: 100vh;
+  background: url('./background-pics/background-4.jpg') !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+} */
+
+#home-page, #about-page{
+  min-height: 100vh;
+  background: url('./background-pics/background-2.jpg') !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+}
+
+#trips-page{
   min-height: 100vh;
   background: url('./background-pics/background-1.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
 }
 
-.signup-login-background{
+#tripform-page{
+  min-height: 200vh;
+  background: url('./background-pics/background-4.jpg') !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+}
+
+#signup-page, #login-page{
   min-height: 100vh;
   background: url('./background-pics/background-3.jpg') !important;
   background-size: cover !important;
@@ -36,6 +57,7 @@ div.thirteen.wide.column{
 .mainheader-container{
   padding-right: 0px !important;
   max-width: 265px;
+  max-height: 100vh;
 }
 
 #mapCoordinateDisplay{
@@ -59,13 +81,35 @@ div.thirteen.wide.column{
 #about{
   max-width: 60%;
   position: absolute;
-  left: 20%;
+  left: 15%;
   top: 33%;
+  opacity: 0.8;
 }
 
 #trip-form{
   min-width: 70%;
   position: absolute;
   left: 15%;
-  top: 20%
+  top: 4%
+}
+
+#home-title{
+  color: black;
+  opacity: 0.7;
+  font-size: 6em;
+  position: fixed;
+  left: 35%;
+  top: 39%;
+}
+
+#searchbar{
+  border-radius: 30px;
+  width: 20em;
+  height: 3em;
+  border-style: none;
+}
+
+#trips-grid{
+  position: absolute;
+  top: 10%;
 }

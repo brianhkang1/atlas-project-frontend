@@ -1,4 +1,4 @@
-function tripsReducer(state = [], action){
+export function tripsReducer(state = [], action){
   switch(action.type){
     case 'FETCHING_TRIPS':
       return state
@@ -8,5 +8,3 @@ function tripsReducer(state = [], action){
       return state
   }
 }
-
-export default tripsReducer

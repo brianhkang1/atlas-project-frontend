@@ -1,4 +1,4 @@
-function signedInUser(state = [], action){
+export function signedInUserReducer(state = [], action){
   switch(action.type){
     case 'FETCHING_SIGNEDINUSER':
       return state
@@ -10,5 +10,3 @@ function signedInUser(state = [], action){
       return state
   }
 }
-
-export default signedInUser
