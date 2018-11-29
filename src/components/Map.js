@@ -17,9 +17,33 @@ class Map extends React.Component {
     }
   }
 
+  componentDidMount(){
+    const map = this.reactMap.getMap()
+    map.on('load', () => this.addLayer(map, this.props.countryCodes()))
+  }
+
+  addLayer = (map, countryCodes) => {
+    map.addLayer({
+      'id': 'countries',
+      'source': {
+        'type': 'vector',
+        'url': 'mapbox://brianhkang1.cjorlrqa'
+      },
+      'source-layer': 'ne_10m_admin_0_countries-40v53a',
+      'type': 'fill',
+      'paint': {
+        'fill-color': 'rgb(205,153,61)', //this is the color you want your tileset to have (I used a nice purple color)
+        'fill-outline-color': '#F2F2F2' //this helps us distinguish individual countries a bit better by giving them an outline
+      }
+    })
+    debugger
+    map.setFilter('countries', ['in', 'ADM0_A3_IS'].concat(countryCodes));
+  }
+
   render() {
     return (
       <ReactMapGL
+        ref={(reactMap) => { this.reactMap = reactMap; }}
         {...this.state.viewport}
         mapStyle="mapbox://styles/mapbox/light-v9"
         mapboxApiAccessToken={TOKEN}

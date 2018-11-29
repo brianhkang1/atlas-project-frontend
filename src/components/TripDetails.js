@@ -33,7 +33,7 @@ class TripDetails extends React.Component{
 
   renderTitle = () => {
     if(this.props.trip.country_name.toLowerCase() === "korea (republic of)"){
-      return "SOUTH korea"
+      return "SOUTH KOREA"
     } else if(this.props.trip.country_name.toLowerCase() === "united kingdom of great britain and northern ireland"){
       return "GREAT BRITAIN"
     } else {return this.props.trip.country_name.toUpperCase()}
