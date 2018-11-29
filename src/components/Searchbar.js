@@ -4,6 +4,7 @@ import { Input } from 'semantic-ui-react'
 const Searchbar = (props) => {
   return(
     <Input
+      focus
       id="searchbar"
       icon='search'
       iconPosition="left"

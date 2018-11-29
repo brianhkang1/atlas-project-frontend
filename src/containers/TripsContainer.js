@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from "react-redux"
 import { Grid } from 'semantic-ui-react'
 import { fetchAllTrips } from '../redux/actions/fetch_AllTrips'
-import { fetchRestCountriesAPI } from '../redux/actions/fetch_restcountriesAPI'
 import Trip from '../components/Trip'
 import Searchbar from '../components/Searchbar.js'
 
@@ -16,7 +15,6 @@ class TripsContainer extends React.Component{
 
   componentDidMount(){
     this.props.fetchAllTrips()
-    this.props.fetchRestCountriesAPI()
   }
 
   handleInputChange = (event) => {
@@ -26,7 +24,7 @@ class TripsContainer extends React.Component{
   filteredTrips = () => {
     let filteredTripList = this.props.tripsList.filter(trip => trip.country_name.includes(this.state.searchInput))
     return filteredTripList.map(trip => {
-      return <Trip key={trip.id} trip={trip} />
+      return <Trip key={trip.id} trip={trip} router={this.props.router}/>
     })
   }
 
@@ -34,7 +32,7 @@ class TripsContainer extends React.Component{
   render(){
     return(
       <div id="trips-page">
-        <Grid id="trips-grid" centered>
+        <Grid id="trips-grid" centered columns={3}>
           <Grid.Row>
             <Searchbar handleInputChange={this.handleInputChange} />
           </Grid.Row>
@@ -50,14 +48,12 @@ class TripsContainer extends React.Component{
 const mapStateToProps = (state) => {
   return {
     tripsList: state.trips,
-    countryList: state.restcountriesAPI
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllTrips: () => dispatch(fetchAllTrips()),
-    fetchRestCountriesAPI: () => dispatch(fetchRestCountriesAPI())
   }
 }
 

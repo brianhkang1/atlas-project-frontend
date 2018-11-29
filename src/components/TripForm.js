@@ -26,12 +26,6 @@ class TripForm extends React.Component {
     })
   }
 
-  // handleCountryPick = (event) => {
-  //   if(this.props.countryList.find(country => country.name === event.target.value)){
-  //     this.setState({country: country.alpha3Code})
-  //   } else {alert("Please choose a valid country")}
-  // }
-
   handleAddItinerary = () => {
     let arr = [...this.state.itinerary, ""]
     this.setState({itinerary: arr})
@@ -75,9 +69,8 @@ class TripForm extends React.Component {
 
     let formData = new FormData()
     formData.append("creator_id", this.props.signedInUser[0].id)
-    formData.append("country_name", this.state.country.toLowerCase())
+    formData.append("country_name", this.state.country)
     formData.append("summary", this.state.summary)
-    // formData.append("photos", this.state.pictures)
     this.state.pictures.forEach( (photo, index) => {
       formData.append(`photo-${index+1}`, photo)
     })

@@ -8,6 +8,7 @@ import Signup from './components/Signup'
 import MapContainer from './containers/MapContainer'
 import TripsContainer from './containers/TripsContainer'
 import TripFormContainer from './containers/TripFormContainer'
+import TripDetails from './components/TripDetails'
 import { Grid } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { fetchSignedInUser } from './redux/actions/fetch_signedInUser'
@@ -30,8 +31,12 @@ class App extends Component {
           <Route exact path="/" render={() => <Home/>}/>
           <Route exact path="/about" render={() => <About/>}/>
           <Route exact path="/map" render={() => <MapContainer/>}/>
-          <Route exact path="/trips" render={() => <TripsContainer/>}/>
+          <Route exact path="/trips" render={(props) => <TripsContainer router={props}/>}/>
           <Route exact path="/form" render={(props) => <TripFormContainer router={props}/>}/>
+          <Route exact path="/trips/:id" render={(props) => {
+          let tripId = parseInt(props.match.params.id)
+          return <TripDetails tripId={tripId} router={props}/>}}
+          />
         {this.props.signedInUser.length === 0 ?
         <React.Fragment>
           <Route exact path="/login" render={(props) => <Login router={props} />} />
