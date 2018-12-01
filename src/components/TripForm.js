@@ -86,7 +86,10 @@ class TripForm extends React.Component {
       body: formData
     }).then(res => res.json()).then(json => {
       // this.props.fetchAllRecipes()
-      routerProps.history.push(`/trips/${json.id}`)})
+      if (json.error){
+        alert("Form could not be posted. Please make sure all fields are filled out.")
+      } else { routerProps.history.push(`/trips/${json.id}`) }
+    })
   }
 
   render(){
@@ -122,9 +125,9 @@ class TripForm extends React.Component {
                 )}
             </Form.Field>
             <Segment>
-              <ImageUploader withIcon={true} withLabel={false} withPreview={true} buttonText='Upload image(s) of your trip' onChange={this.onDrop} imgExtension={['.jpg', '.png']}/>
+              <ImageUploader required withIcon={true} withLabel={false} withPreview={true} buttonText='Upload image(s) of your trip' onChange={this.onDrop} imgExtension={['.jpg', '.png']}/>
             </Segment>
-            <Button color="blue" fluid onClick={(event) => this.handleSubmit(event, this.props.router)}>Share</Button>
+            <Button fluid content="share" color="blue" onClick={(event) => this.handleSubmit(event, this.props.router)} />
           </Segment>
         </Form>
       }

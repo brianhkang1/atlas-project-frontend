@@ -1,5 +1,6 @@
 import React from 'react'
-import ReactMapGL, { NavigationControl } from 'react-map-gl';
+import ReactMapGL, { NavigationControl, Marker } from 'react-map-gl';
+import { Icon } from 'semantic-ui-react'
 
 const TOKEN = 'pk.eyJ1IjoiYnJpYW5oa2FuZzEiLCJhIjoiY2pvcWdhcDBoMDBiOTNwbzhwYmZoZXdhcCJ9.OJ80JPnBiloxsbYIBuP5-Q';
 
@@ -36,8 +37,12 @@ class Map extends React.Component {
         'fill-outline-color': '#F2F2F2' //this helps us distinguish individual countries a bit better by giving them an outline
       }
     })
-    debugger
+
     map.setFilter('countries', ['in', 'ADM0_A3_IS'].concat(countryCodes));
+  }
+
+  handleMarkerClick = (event) => {
+    
   }
 
   render() {
@@ -50,6 +55,9 @@ class Map extends React.Component {
         onViewportChange={(viewport) => this.setState({viewport})}
         minZoom={1.19}
       >
+      <Marker latitude={37.78} longitude={-122.41}>
+        <Icon size="large" name="map pin" color="red" onClick={this.handleMarkerClick}/>
+      </Marker>
         <div id="mapCoordinateDisplay">
           <div>{`Latitude: ${this.state.viewport.latitude.toFixed(4)} // Longitude: ${this.state.viewport.longitude.toFixed(4)} // Zoom: ${this.state.viewport.zoom.toFixed(2)}`}</div>
         </div>
