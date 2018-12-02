@@ -26,7 +26,7 @@ class MapContainer extends React.Component{
 
   render(){
     return(
-      <Map countryCodes={this.filterAlphaCodes}/>
+      <Map countryCodes={this.filterAlphaCodes} signedInUser={this.props.signedInUser}/>
     )
   }
 }

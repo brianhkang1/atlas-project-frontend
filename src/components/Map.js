@@ -14,7 +14,9 @@ class Map extends React.Component {
         latitude: 44.5739,
         longitude: 7.7952,
         zoom: 1.19
-      }
+      },
+      popupInfo: null,
+      addNewMarker: null
     }
   }
 
@@ -42,28 +44,59 @@ class Map extends React.Component {
   }
 
   handleMarkerClick = (event) => {
-    
+    debugger
+    alert(JSON.stringify(event.lngLat))
   }
+
+  renderMarkers = () => {
+    return this.props.signedInUser[0].pinned_locations.map(loc => {
+      return <Marker longitude={parseFloat(loc.longitude)} latitude={parseFloat(loc.latitude)}><Icon size="large" name="map pin" color="red" onClick={this.handleMarkerClick}/></Marker>
+    })
+  }
+
+  handleMapClick = (event) => {
+    debugger
+    this.setState({
+      addNewMarker: {
+        longitude: event.lngLat[0]-2,
+        latitude: event.lngLat[1]+2
+      }
+    })
+  }
+
+  addMarker = (event) => {
+    return this.state.addNewMarker && (
+      <Marker longitude={this.state.addNewMarker.longitude} latitude={this.state.addNewMarker.latitude}>
+        <Icon size="large" name="map pin" color="red" onClick={this.handleMarkerClick}/>
+      </Marker>
+    )
+  }
+
+  getCursor = ({isHovering, isDragging}) => {
+  return isHovering ? 'pointer' : 'default';
+};
 
   render() {
     return (
-      <ReactMapGL
-        ref={(reactMap) => { this.reactMap = reactMap; }}
-        {...this.state.viewport}
-        mapStyle="mapbox://styles/mapbox/light-v9"
-        mapboxApiAccessToken={TOKEN}
-        onViewportChange={(viewport) => this.setState({viewport})}
-        minZoom={1.19}
-      >
-      <Marker latitude={37.78} longitude={-122.41}>
-        <Icon size="large" name="map pin" color="red" onClick={this.handleMarkerClick}/>
-      </Marker>
-        <div id="mapCoordinateDisplay">
-          <div>{`Latitude: ${this.state.viewport.latitude.toFixed(4)} // Longitude: ${this.state.viewport.longitude.toFixed(4)} // Zoom: ${this.state.viewport.zoom.toFixed(2)}`}</div>
-        </div>
-        <div style={{position: 'absolute', right: 0, top: 0, padding: 25}}>
-         <NavigationControl onViewportChange={(viewport) => this.setState({viewport})} showCompass={false} />
-       </div>
+        <ReactMapGL
+          ref={(reactMap) => { this.reactMap = reactMap; }}
+          {...this.state.viewport}
+          mapStyle="mapbox://styles/mapbox/light-v9"
+          mapboxApiAccessToken={TOKEN}
+          onViewportChange={(viewport) => this.setState({viewport})}
+          minZoom={1.19}
+          onClick={this.handleMapClick}
+          getCursor={this.getCursor}
+        >
+        {this.addMarker()}
+        {this.props.signedInUser.length === 0 ? null : this.renderMarkers()}
+
+          <div id="mapCoordinateDisplay">
+            <div>{`Latitude: ${this.state.viewport.latitude.toFixed(4)} // Longitude: ${this.state.viewport.longitude.toFixed(4)} // Zoom: ${this.state.viewport.zoom.toFixed(2)}`}</div>
+          </div>
+          <div style={{position: 'absolute', right: 0, top: 0, padding: 25}}>
+           <NavigationControl onViewportChange={(viewport) => this.setState({viewport})} showCompass={false} />
+         </div>
       </ReactMapGL>
     );
   }
