@@ -5,6 +5,6 @@ export function fetchSignedInUser() {
       headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
     })
       .then(response => response.json())
-      .then(user => dispatch({ type: 'ADD_FETCHED_SIGNEDINUSER', payload: user.user}));
+      .then(json => dispatch({ type: 'ADD_FETCHED_SIGNEDINUSER', payload: json.user}));
   };
 }

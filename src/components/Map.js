@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactMapGL, { NavigationControl, Marker } from 'react-map-gl';
 import { Icon } from 'semantic-ui-react'
+import whichCountry from 'pp-which-country'
+
 
 const TOKEN = 'pk.eyJ1IjoiYnJpYW5oa2FuZzEiLCJhIjoiY2pvcWdhcDBoMDBiOTNwbzhwYmZoZXdhcCJ9.OJ80JPnBiloxsbYIBuP5-Q';
 
@@ -43,31 +45,48 @@ class Map extends React.Component {
     map.setFilter('countries', ['in', 'ADM0_A3_IS'].concat(countryCodes));
   }
 
-  handleMarkerClick = (event) => {
-    debugger
-    alert(JSON.stringify(event.lngLat))
+  handleMarkerClick = (event, longitude, latitude) => {
+    alert(whichCountry([longitude, latitude]))
   }
 
   renderMarkers = () => {
     return this.props.signedInUser[0].pinned_locations.map(loc => {
-      return <Marker longitude={parseFloat(loc.longitude)} latitude={parseFloat(loc.latitude)}><Icon size="large" name="map pin" color="red" onClick={this.handleMarkerClick}/></Marker>
+      return <Marker key={loc.id} longitude={parseFloat(loc.longitude)} latitude={parseFloat(loc.latitude)} offsetLeft={-20} offsetTop={-10}><Icon size="large" name="map pin" color="red" onClick={(event) => this.handleMarkerClick(event, parseFloat(loc.longitude), parseFloat(loc.latitude))}/></Marker>
     })
   }
 
   handleMapClick = (event) => {
-    debugger
     this.setState({
       addNewMarker: {
-        longitude: event.lngLat[0]-2,
-        latitude: event.lngLat[1]+2
+        longitude: event.lngLat[0],
+        latitude: event.lngLat[1]
       }
     })
+    this.postPinnedLocation()
+  }
+
+  postPinnedLocation = () => {
+    let body = {
+      longitude: this.state.addNewMarker.longitude.toFixed(4),
+      latitude: this.state.addNewMarker.latitude.toFixed(4),
+      country: whichCountry([this.state.addNewMarker.longitude, this.state.addNewMarker.latitude])
+    }
+
+    fetch(`http://localhost:3000/api/v1/pinned_locations`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization" : `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify(body)
+    }).then(res => res.json()).then(json => console.log(json))
   }
 
   addMarker = (event) => {
     return this.state.addNewMarker && (
-      <Marker longitude={this.state.addNewMarker.longitude} latitude={this.state.addNewMarker.latitude}>
-        <Icon size="large" name="map pin" color="red" onClick={this.handleMarkerClick}/>
+      <Marker longitude={this.state.addNewMarker.longitude} latitude={this.state.addNewMarker.latitude} offsetLeft={-10} offsetTop={-20}>
+        <Icon size="large" name="map pin" color="red" onClick={(event) => this.handleMarkerClick(event, this.state.addNewMarker.longitude, this.state.addNewMarker.latitude)}/>
       </Marker>
     )
   }
