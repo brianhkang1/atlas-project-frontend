@@ -2,11 +2,13 @@ import React from 'react'
 import Map from '../components/Map'
 import { connect } from 'react-redux'
 import { fetchRestCountriesAPI } from '../redux/actions/fetch_restcountriesAPI'
+import { fetchAllTrips } from '../redux/actions/fetch_AllTrips'
 
 class MapContainer extends React.Component{
 
   componentDidMount(){
     this.props.fetchRestCountriesAPI()
+    this.props.fetchAllTrips()
   }
 
   filterAlphaCodes = () => {
@@ -26,7 +28,7 @@ class MapContainer extends React.Component{
 
   render(){
     return(
-      <Map countryCodes={this.filterAlphaCodes} signedInUser={this.props.signedInUser}/>
+      <Map countryCodes={this.filterAlphaCodes} signedInUser={this.props.signedInUser} tripsList={this.props.tripsList} countryList={this.props.countryList}/>
     )
   }
 }
@@ -34,12 +36,14 @@ class MapContainer extends React.Component{
 const mapStateToProps = (state) => {
   return {
     signedInUser: state.signedInUser,
-    countryList: state.restcountriesAPI
+    countryList: state.restcountriesAPI,
+    tripsList: state.trips
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetchAllTrips: () => dispatch(fetchAllTrips()),
     fetchRestCountriesAPI: () => dispatch(fetchRestCountriesAPI())
   }
 }

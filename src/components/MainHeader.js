@@ -40,14 +40,20 @@ class MainHeader extends Component {
         />
         <Menu.Item className="menu-item" as={ NavLink } to="/map"
           align="right"
-          name='SEE YOUR MAP'
-          active={activeItem === 'SEE YOUR MAP'}
+          name='YOUR MAP'
+          active={activeItem === 'YOUR MAP'}
           onClick={this.handleItemClick}
         />
         <Menu.Item className="menu-item" as={ NavLink } to="/trips"
           align="right"
           name='SEARCH TRIPS'
           active={activeItem === 'SEARCH TRIPS'}
+          onClick={this.handleItemClick}
+        />
+        <Menu.Item className="menu-item" as={ NavLink } to="/liked_trips"
+          align="right"
+          name='TRIPS YOU LIKED'
+          active={activeItem === 'TRIPS YOU LIKED'}
           onClick={this.handleItemClick}
         />
         <Menu.Item className="menu-item" as={ NavLink } to="/form"
