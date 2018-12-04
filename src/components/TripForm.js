@@ -97,7 +97,7 @@ class TripForm extends React.Component {
       <div id="tripform-page">
       <div id="trip-form">
       {this.props.signedInUser.length === 0 ?
-        <Segment>
+        <Segment inverted align="center">
           <p className="normal-text">You must be signed in to post a trip.</p>
         </Segment>
         :

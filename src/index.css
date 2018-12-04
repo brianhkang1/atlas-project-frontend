@@ -5,7 +5,7 @@
   background-attachment: fixed !important;
 } */
 
-body{
+body, .normal-text{
   font-family: 'Philosopher', sans-serif;
 }
 
@@ -233,4 +233,8 @@ div.title{ /*accordion titles */
 .trip-show-summary-content, .trip-show-subheader{
   text-align: center;
   font-size: 1.3em;
+}
+
+#searchbar-row{
+  background-color: rgb(30,30,30);
 }

@@ -113,10 +113,11 @@ class TripDetails extends React.Component{
             <div className="trip-show-subheader">
               <span className="trip-show-page-username">{this.props.trip.creator.username}</span>
               <span className="trip-show-like">
-                {this.state.userLikesTrip ?
-                  <Button onClick={this.handleUnlikeClick}><Icon fitted color="red" name="heart"/></Button>
-                  :
-                  <Button onClick={this.handleLikeClick}><Icon fitted name="heart"/></Button>
+                {this.props.signedInUser.length === 0 ? null :
+                  this.state.userLikesTrip ?
+                    <Button onClick={this.handleUnlikeClick}><Icon fitted color="red" name="heart"/></Button>
+                    :
+                    <Button onClick={this.handleLikeClick}><Icon fitted name="heart"/></Button>
                 }
               </span>
             </div>

@@ -17,7 +17,7 @@ import { fetchSignedInUser } from './redux/actions/fetch_signedInUser'
 class App extends Component {
   componentDidMount(){
     let token = localStorage.getItem('token')
-    if(token){
+    if(token && token !== "undefined"){
       this.props.fetchSignedInUser()
     }
   }

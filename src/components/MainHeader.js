@@ -24,8 +24,9 @@ class MainHeader extends Component {
     const { activeItem } = this.state
     return (
       <Sidebar as={Menu} visible vertical inverted borderless size="large" id="main-header">
+        <Menu.Item />
         <Menu.Item id="header-title" header as={ NavLink } exact to="/"
-          align="right"
+          align="center"
           name="ATLAS"
           active={activeItem === 'ATLAS'}
           onClick={this.handleItemClick}

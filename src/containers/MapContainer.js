@@ -1,5 +1,6 @@
 import React from 'react'
 import Map from '../components/Map'
+import { Segment } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { fetchRestCountriesAPI } from '../redux/actions/fetch_restcountriesAPI'
 import { fetchAllTrips } from '../redux/actions/fetch_AllTrips'
@@ -28,7 +29,18 @@ class MapContainer extends React.Component{
 
   render(){
     return(
-      <Map countryCodes={this.filterAlphaCodes} signedInUser={this.props.signedInUser} tripsList={this.props.tripsList} countryList={this.props.countryList} router={this.props.router}/>
+      <React.Fragment>
+        {
+        this.props.signedInUser.length === 0 ?
+        <div id="trip-form">
+          <Segment inverted align="center">
+            <p className="normal-text">You must be signed in to see the map.</p>
+          </Segment>
+        </div>
+        :
+        <Map countryCodes={this.filterAlphaCodes} signedInUser={this.props.signedInUser} tripsList={this.props.tripsList} countryList={this.props.countryList} router={this.props.router}/>
+        }
+      </React.Fragment>
     )
   }
 }

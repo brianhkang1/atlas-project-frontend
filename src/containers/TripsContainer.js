@@ -40,7 +40,7 @@ class TripsContainer extends React.Component{
     return(
       <div id="trips-page">
         <Grid id="trips-grid" centered columns={3}>
-          <Grid.Row>
+          <Grid.Row id="searchbar-row">
             <Searchbar handleInputChange={this.handleInputChange} searchInput={this.state.searchInput}/>
           </Grid.Row>
           <Grid.Row>
