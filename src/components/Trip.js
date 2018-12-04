@@ -5,6 +5,12 @@ const BASE_URL = "http://localhost:3000"
 
 
 class Trip extends React.Component{
+  constructor(props){
+    super(props)
+    this.state={
+      liked: false
+    }
+  }
 
   handleImageClick = (event, routerProps) => {
     routerProps.history.push(`/trips/${this.props.trip.id}`)
@@ -21,7 +27,10 @@ class Trip extends React.Component{
       <Grid.Column className="trip-images-columns">
         <Container className="trip-images">
           <Image src={this.renderPhotos()}/>
-          <div className="overlay" onClick={(event) => this.handleImageClick(event, this.props.router)}>{this.props.trip.country_name.toUpperCase()}</div>
+          <div className="overlay" onClick={(event) => this.handleImageClick(event, this.props.router)}>
+            <div>{this.props.trip.country_name.toUpperCase()}</div>
+            <div>posted by: {this.props.trip.creator.username}</div>
+          </div>
         </Container>
       </Grid.Column>
     )

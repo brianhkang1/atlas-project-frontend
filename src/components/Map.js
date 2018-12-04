@@ -59,16 +59,23 @@ class Map extends React.Component {
     })
   }
 
+  routeToSearchTrips = (event, routerProps, fullCountryName) => {
+    routerProps.history.push(`/search_trips/${fullCountryName}`)
+  }
+
   renderCountryTrips = () => {
     let fullCountryName = this.props.countryList.find(country => country.alpha3Code === this.state.popupInfo.alpha3Country).name
     let filteredTrips = this.props.tripsList.filter(trip => trip.country_name === fullCountryName)
     if(filteredTrips.length === 0){
-      return "No trips posted for " + fullCountryName + ". Be the first!"
+      return <div>No trips posted for {fullCountryName}. <span className="be-the-first" onClick={(event) => this.routeToForm(event, this.props.router)}>You can be the first!</span></div>
     } else {
-      return "See trips for " + fullCountryName
+      return <div>See trips for <span className="see-trips-for" onClick={(event) => this.routeToSearchTrips(event, this.props.router, fullCountryName)}>{fullCountryName}</span></div>
     }
   }
 
+  routeToForm = (event, routerProps) => {
+    routerProps.history.push("/form")
+  }
   closePopup = () => {
     this.setState({popupInfo: null})
   }
@@ -86,7 +93,7 @@ class Map extends React.Component {
       <div>{this.renderCountryTrips()}</div>
       <br/>
       <div id="delete-pin">
-        <span onClick={this.handleDeletePin}>
+        <span className="delete-pin-text" onClick={this.handleDeletePin}>
           Delete this pin
         </span>
       </div>
@@ -151,19 +158,23 @@ class Map extends React.Component {
       country: whichCountry([this.state.addNewMarker.longitude, this.state.addNewMarker.latitude])
     }
 
-    fetch(`http://localhost:3000/api/v1/pinned_locations`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization" : `Bearer ${localStorage.getItem('token')}`
-      },
-      body: JSON.stringify(body)
-    }).then(res => res.json()).then(json => {
-      this.setState({
-        pinned_locations: [...this.state.pinned_locations, json]
+    if(body.country === null){
+      alert("You can't pin the ocean")
+    } else {
+      fetch(`http://localhost:3000/api/v1/pinned_locations`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization" : `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify(body)
+      }).then(res => res.json()).then(json => {
+        this.setState({
+          pinned_locations: [...this.state.pinned_locations, json]
+        })
       })
-    })
+    }
   }
 
   getCursor = ({isHovering, isDragging}) => {

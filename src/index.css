@@ -5,26 +5,32 @@
   background-attachment: fixed !important;
 } */
 
-#home-page, #about-page{
-  min-height: 102vh;
-  background: url('./background-pics/background-2.jpg') !important;
-  background-size: cover !important;
-  background-attachment: fixed !important;
+body{
+  font-family: 'Philosopher', sans-serif;
 }
 
-
-#trips-page{
+#home-page, #about-page{
   min-height: 102vh;
   background: url('./background-pics/background-1.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
+  font-family: 'Philosopher', sans-serif;
 }
+
+
+/* #trips-page{
+  min-height: 102vh;
+  background: url('./background-pics/background-2.jpg') !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+} */
 
 #tripform-page{
   min-height: 200vh;
   background: url('./background-pics/background-4.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
+  font-family: 'Philosopher', sans-serif;
 }
 
 #signup-page, #login-page{
@@ -36,6 +42,7 @@
 
 #header-title{
   font-size: 2em;
+  font-family: 'Philosopher', sans-serif;
 }
 
 .menu-item{
@@ -102,6 +109,12 @@ div.thirteen.wide.column{
   position: fixed;
   left: 35%;
   top: 39%;
+  font-family: 'Philosopher', sans-serif;
+  /* font-weight: bold; */
+}
+
+a, .about-page-title, .show-page-title, .trip-show-summary, .trip-show-itinerary{
+  font-family: 'Philosopher', sans-serif;
 }
 
 #searchbar{
@@ -127,7 +140,7 @@ div.thirteen.wide.column{
   opacity:0;
   color: white;
   font-size: 20px;
-  padding: 25%;
+  padding: 20%;
   text-align: center;
 }
 
@@ -158,9 +171,9 @@ div.thirteen.wide.column{
   object-fit: contain;
 }
 
-#trip-show-page{
+/* #trip-show-page{
   padding-top: 4%;
-}
+} */
 
 .slick-prev {
   left: 1.5% !important;
@@ -177,11 +190,47 @@ div.thirteen.wide.column{
 
 .show-page-title{
   padding-left: 3%;
-  padding-bottom: 1%;
+  padding-bottom: 0px;
 }
 
-.trip-show-summary, .trip-show-itinerary{
+.trip-show-summary{
   border-bottom: 1px solid grey;
   padding-bottom: 3%;
+  padding-top: 4%;
+  margin-left: 4%;
+  margin-right: 4%;
+
+}
+
+.trip-show-itinerary{
+  padding-bottom: 3%;
   margin: 4%;
+}
+
+div.title{ /*accordion titles */
+  border-bottom: solid;
+  border-width: 1px;
+  border-bottom-color: black;
+  font-size: 1.4em !important;
+}
+
+.delete-pin-text, .be-the-first, .see-trips-for{
+  color: blue;
+}
+
+.delete-pin-text:hover, .be-the-first:hover, .see-trips-for:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.trip-show-like{
+  padding-left: 4%;
+}
+
+.black-box{
+  padding-top: 2%;
+  padding-bottom: 2%;
+  background-color: rgb(30,30,30);
+  color: white;
+  text-align: center;
 }

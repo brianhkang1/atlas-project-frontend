@@ -31,8 +31,9 @@ class App extends Component {
         <Grid.Column width={13}>
           <Route exact path="/" render={() => <Home/>}/>
           <Route exact path="/about" render={() => <About/>}/>
-          <Route exact path="/map" render={() => <MapContainer/>}/>
-          <Route exact path="/trips" render={(props) => <TripsContainer router={props}/>}/>
+          <Route exact path="/map" render={(props) => <MapContainer router={props}/>}/>
+          <Route exact path="/search_trips/:input" render={(props) => <TripsContainer router={props}/>}/>
+          <Route exact path="/search_trips" render={(props) => <TripsContainer router={props}/>}/>
           <Route exact path="/liked_trips" render={() => <LikedTripsContainer/>}/>
           <Route exact path="/form" render={(props) => <TripFormContainer router={props}/>}/>
           <Route exact path="/trips/:id" render={(props) => {

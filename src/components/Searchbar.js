@@ -10,6 +10,7 @@ const Searchbar = (props) => {
       iconPosition="left"
       placeholder="Search by Country"
       onChange={props.handleInputChange}
+      value={props.searchInput}
     />
   )
 }

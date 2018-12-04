@@ -26,8 +26,8 @@ class MainHeader extends Component {
       <Sidebar as={Menu} visible vertical inverted borderless size="large" id="main-header">
         <Menu.Item id="header-title" header as={ NavLink } exact to="/"
           align="right"
-          name="PENDING TITLE"
-          active={activeItem === 'PENDING TITLE'}
+          name="ATLAS"
+          active={activeItem === 'ATLAS'}
           onClick={this.handleItemClick}
         />
         <Menu.Item />
@@ -44,7 +44,7 @@ class MainHeader extends Component {
           active={activeItem === 'YOUR MAP'}
           onClick={this.handleItemClick}
         />
-        <Menu.Item className="menu-item" as={ NavLink } to="/trips"
+        <Menu.Item className="menu-item" as={ NavLink } to="/search_trips"
           align="right"
           name='SEARCH TRIPS'
           active={activeItem === 'SEARCH TRIPS'}

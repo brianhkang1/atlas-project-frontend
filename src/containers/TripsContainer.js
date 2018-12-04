@@ -15,6 +15,13 @@ class TripsContainer extends React.Component{
 
   componentDidMount(){
     this.props.fetchAllTrips()
+    this.initialSearch()
+  }
+
+  initialSearch = () => {
+    if(this.props.router.match.params.input){
+      this.setState({searchInput: this.props.router.match.params.input})
+    }
   }
 
   handleInputChange = (event) => {
@@ -24,7 +31,7 @@ class TripsContainer extends React.Component{
   filteredTrips = () => {
     let filteredTripList = this.props.tripsList.filter(trip => trip.country_name.toLowerCase().includes(this.state.searchInput.toLowerCase()))
     return filteredTripList.map(trip => {
-      return <Trip key={trip.id} trip={trip} router={this.props.router}/>
+      return <Trip key={trip.id} trip={trip} signedInUser={this.props.signedInUser} router={this.props.router}/>
     })
   }
 
@@ -34,7 +41,7 @@ class TripsContainer extends React.Component{
       <div id="trips-page">
         <Grid id="trips-grid" centered columns={3}>
           <Grid.Row>
-            <Searchbar handleInputChange={this.handleInputChange} />
+            <Searchbar handleInputChange={this.handleInputChange} searchInput={this.state.searchInput}/>
           </Grid.Row>
           <Grid.Row>
             {this.filteredTrips()}
@@ -48,6 +55,7 @@ class TripsContainer extends React.Component{
 const mapStateToProps = (state) => {
   return {
     tripsList: state.trips,
+    signedInUser: state.signedInUser
   }
 }
 

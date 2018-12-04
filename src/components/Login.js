@@ -42,7 +42,7 @@ class Login extends React.Component {
         } else {
           localStorage.setItem("token", json.jwt)
           this.props.signInUser(json.user)
-          routerProps.history.push('/trips')
+          routerProps.history.push('/search_trips')
         }
       })
     }

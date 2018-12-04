@@ -28,7 +28,7 @@ class MapContainer extends React.Component{
 
   render(){
     return(
-      <Map countryCodes={this.filterAlphaCodes} signedInUser={this.props.signedInUser} tripsList={this.props.tripsList} countryList={this.props.countryList}/>
+      <Map countryCodes={this.filterAlphaCodes} signedInUser={this.props.signedInUser} tripsList={this.props.tripsList} countryList={this.props.countryList} router={this.props.router}/>
     )
   }
 }
