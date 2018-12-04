@@ -46,9 +46,13 @@ class Signup extends React.Component {
       body: JSON.stringify(body)
     }).then(res => res.json())
       .then(json => {
-        localStorage.setItem("token", json.jwt)
-        this.props.signInUser(json.user)
-        routerProps.history.push("/search_trips")
+        if(!json.jwt || !json.user ){
+          alert("Username already taken")
+        } else {
+          localStorage.setItem("token", json.jwt)
+          this.props.signInUser(json.user)
+          routerProps.history.push("/search_trips")
+        }
       })
     }
 

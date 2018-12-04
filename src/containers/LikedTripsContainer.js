@@ -2,11 +2,16 @@ import React from 'react'
 import Trip from '../components/Trip'
 import { connect } from 'react-redux'
 import { fetchAllTrips } from '../redux/actions/fetch_AllTrips'
+import { fetchSignedInUser } from '../redux/actions/fetch_signedInUser'
 import { Grid, Segment } from 'semantic-ui-react'
 
 class LikedTripsContainer extends React.Component{
   componentDidMount(){
     this.props.fetchAllTrips()
+    let token = localStorage.getItem('token')
+    if(token && token !== "undefined"){
+      this.props.fetchSignedInUser()
+    }
   }
 
   renderLikedTrips = () => {
@@ -54,6 +59,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllTrips: () => dispatch(fetchAllTrips()),
+    fetchSignedInUser: () => dispatch(fetchSignedInUser())
   }
 }
 

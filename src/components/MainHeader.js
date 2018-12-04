@@ -25,12 +25,20 @@ class MainHeader extends Component {
     return (
       <Sidebar as={Menu} visible vertical inverted borderless size="large" id="main-header">
         <Menu.Item />
-        <Menu.Item id="header-title" header as={ NavLink } exact to="/"
-          align="center"
-          name="ATLAS"
-          active={activeItem === 'ATLAS'}
-          onClick={this.handleItemClick}
-        />
+        {this.props.signedInUser.length === 0 ?
+          <Menu.Item id="header-title" header as={ NavLink } exact to="/"
+            align="center"
+            name='ATLAS'
+            active={activeItem === 'ATLAS'}
+            onClick={this.handleItemClick}
+          />
+        :
+          <Menu.Item id="header-title" header as={ NavLink } exact to="/"
+            align="center"
+            name={`Welcome ${this.props.signedInUser[0].username}`}
+            onClick={this.handleItemClick}
+          />
+        }
         <Menu.Item />
         <Menu.Item />
         <Menu.Item className="menu-item" as={ NavLink } to="/about"

@@ -151,7 +151,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {fetchTrip: (tripId) => dispatch(fetchTrip(tripId))}
+  return {
+    fetchTrip: (tripId) => dispatch(fetchTrip(tripId))
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TripDetails)

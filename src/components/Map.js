@@ -195,9 +195,15 @@ class Map extends React.Component {
         >
         {this.props.signedInUser.length === 0 ? null : this.renderMarkers()}
         {this.renderPopup()}
-
-          <div id="mapCoordinateDisplay">
-            <div>{`Latitude: ${this.state.viewport.latitude.toFixed(4)} // Longitude: ${this.state.viewport.longitude.toFixed(4)} // Zoom: ${this.state.viewport.zoom.toFixed(2)}`}</div>
+          <div>
+            <div id="mapCoordinateDisplay">
+              <div>{`Latitude: ${this.state.viewport.latitude.toFixed(4)} // Longitude: ${this.state.viewport.longitude.toFixed(4)} // Zoom: ${this.state.viewport.zoom.toFixed(2)}`}</div>
+            </div>
+            <br/>
+            <div id="mapCoordinateDisplay">
+              <div>Countries you've posted in are highlighted</div>
+              <div>Left click to pin countries you'd like to visit</div>
+            </div>
           </div>
           <div style={{position: 'absolute', right: 0, top: 0, padding: 25}}>
            <NavigationControl onViewportChange={(viewport) => this.setState({viewport})} showCompass={false} />
