@@ -110,7 +110,7 @@ class TripForm extends React.Component {
                 {this.props.countryList.map(country => <option key={country.name} value={country.name} />)}
               </datalist>
             </Form.Field>
-            <Form.TextArea required label="Summary of your trip" name="summary" onChange={this.handleChange} />
+            <Form.TextArea label="Overview of your trip" name="summary" onChange={this.handleChange} />
             <Form.Field>
               <span>
                 <label><Icon circular id="add-button" onClick={this.handleAddItinerary} name="plus"/>Add another itinerary day </label>

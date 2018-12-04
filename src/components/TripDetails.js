@@ -2,7 +2,7 @@ import React from 'react'
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import { Accordion, Button } from 'semantic-ui-react'
+import { Accordion, Button, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { fetchTrip } from '../redux/actions/fetch_Trip'
 
@@ -21,7 +21,7 @@ const sliderSettings = {
 class TripDetails extends React.Component{
   constructor(props){
     super(props)
-    this.state={
+    this.state = {
       userLikesTrip: false
     }
   }
@@ -30,14 +30,12 @@ class TripDetails extends React.Component{
     this.props.fetchTrip(this.props.tripId)
   }
 
-  componentDidUpdate(){
-    this.checkIfUserLikesTrip()d
-  }
-
-  checkIfUserLikesTrip = () => {
-    if(this.props.trip.trip_likers.find(likers => likers.id === this.props.signedInUser[0].id)){
-      this.setState({userLikesTrip: true})
-    } else {return null}
+  componentDidUpdate(prevProps){
+    if((this.props.trip.length !== 0 && this.props.signedInUser.length !== 0) && (this.props.trip !== prevProps.trip || this.props.signedInUser !== prevProps.signedInUser)){
+      if(this.props.trip.trip_likers.find(likers => likers.id === this.props.signedInUser[0].id)){
+        this.setState({userLikesTrip: true})
+      }
+    }
   }
 
   renderPhotos = () => {
@@ -86,23 +84,23 @@ class TripDetails extends React.Component{
   }
 
   handleUnlikeClick = (event) => {
-    let tripLikeId
     fetch(`http://localhost:3000/api/v1/trip_likes`)
       .then(res => res.json())
       .then(json => {
-        tripLikeId = json.find(like => like.trip_liker_id === this.props.signedInUser[0].id && like.liked_trip_id === this.props.tripId).id
+        let tripLikeId = json.find(like => like.trip_liker_id === this.props.signedInUser[0].id && like.liked_trip_id === this.props.tripId).id
         this.deleteTripLikeBackend(tripLikeId)
       })
   }
 
   deleteTripLikeBackend = (tripLikeId) => {
     fetch(`http://localhost:3000/api/v1/trip_likes/${tripLikeId}`,{
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
         "Authorization" : `Bearer ${localStorage.getItem('token')}`
       }
-    })
+    }).then(this.setState({userLikesTrip: false}))
   }
 
   render(){
@@ -110,28 +108,30 @@ class TripDetails extends React.Component{
       <React.Fragment>
         {this.props.trip.length === 0 ? null :
           <div id="trip-show-page">
-          <div className="black-box">
-            <h1 className="show-page-title">{this.renderTitle()}</h1>
-            <div className="show-page-title">posted by: {this.props.trip.creator.username}</div>
-            <div className="trip-show-like">
-              {this.state.userLikesTrip ?
-                <Button onClick={this.handleUnlikeClick}>Unlike</Button> :
-                <Button onClick={this.handleLikeClick}>Like</Button>
-              }
-            </div>
-          </div>
 
-            <div className="trip-show-summary">
-              <h1>OVERVIEW</h1>
-              <p>{this.props.trip.summary}</p>
+            <h1 className="trip-show-page-title black-box">{this.renderTitle()}</h1>
+            <div className="trip-show-subheader">
+              <span className="trip-show-page-username">{this.props.trip.creator.username}</span>
+              <span className="trip-show-like">
+                {this.state.userLikesTrip ?
+                  <Button onClick={this.handleUnlikeClick}><Icon fitted color="red" name="heart"/></Button>
+                  :
+                  <Button onClick={this.handleLikeClick}><Icon fitted name="heart"/></Button>
+                }
+              </span>
             </div>
 
             <Slider {...sliderSettings}>
               {this.renderPhotos()}
             </Slider>
 
+            <div className="trip-show-summary">
+              <h1 className="black-box">OVERVIEW</h1>
+              <p className="trip-show-summary-content">{this.props.trip.summary}</p>
+            </div>
+
             <div className="trip-show-itinerary">
-              <h1>ITINERARY</h1>
+              <h1 className="trip-show-itinerary-title black-box">ITINERARY</h1>
               <Accordion panels={this.renderItinerary()} exclusive={false} fluid />
             </div>
 

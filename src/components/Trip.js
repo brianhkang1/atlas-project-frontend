@@ -5,12 +5,6 @@ const BASE_URL = "http://localhost:3000"
 
 
 class Trip extends React.Component{
-  constructor(props){
-    super(props)
-    this.state={
-      liked: false
-    }
-  }
 
   handleImageClick = (event, routerProps) => {
     routerProps.history.push(`/trips/${this.props.trip.id}`)

@@ -171,10 +171,6 @@ a, .about-page-title, .show-page-title, .trip-show-summary, .trip-show-itinerary
   object-fit: contain;
 }
 
-/* #trip-show-page{
-  padding-top: 4%;
-} */
-
 .slick-prev {
   left: 1.5% !important;
   z-index: 1;
@@ -188,18 +184,16 @@ a, .about-page-title, .show-page-title, .trip-show-summary, .trip-show-itinerary
   color: black !important;
 }
 
-.show-page-title{
+.trip-show-page-title{
   padding-left: 3%;
   padding-bottom: 0px;
 }
 
 .trip-show-summary{
-  border-bottom: 1px solid grey;
   padding-bottom: 3%;
   padding-top: 4%;
   margin-left: 4%;
   margin-right: 4%;
-
 }
 
 .trip-show-itinerary{
@@ -233,4 +227,10 @@ div.title{ /*accordion titles */
   background-color: rgb(30,30,30);
   color: white;
   text-align: center;
+  border-radius: 50px;
+}
+
+.trip-show-summary-content, .trip-show-subheader{
+  text-align: center;
+  font-size: 1.3em;
 }
