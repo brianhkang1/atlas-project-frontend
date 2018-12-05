@@ -2,7 +2,7 @@ import React from 'react'
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import { Accordion, Button, Icon } from 'semantic-ui-react'
+import { Accordion, Button, Icon, Image } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { fetchTrip } from '../redux/actions/fetch_Trip'
 
@@ -41,7 +41,7 @@ class TripDetails extends React.Component{
   renderPhotos = () => {
     return this.props.trip.photos.map(photo => {
       return <div key={photo.id}>
-        <img src={BASE_URL + photo.image_url.url} className="slider-pics"/>
+        <Image src={BASE_URL + photo.image_url.url} className="slider-pics"/>
       </div>
     })
   }
@@ -57,7 +57,7 @@ class TripDetails extends React.Component{
   renderItinerary = () => {
     let panels = []
     this.props.trip.itinerary_days.map((day, index) => {
-      panels[index] = {
+      return panels[index] = {
         key: `panel-${day.id}`,
         title: `DAY ${day.day}: ${day.location.toUpperCase()}`,
         content: day.description

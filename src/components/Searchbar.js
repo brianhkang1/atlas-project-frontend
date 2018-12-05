@@ -7,6 +7,7 @@ const Searchbar = (props) => {
       focus
       id="searchbar"
       icon='search'
+      size="big"
       iconPosition="left"
       placeholder="Search by Country"
       onChange={props.handleInputChange}

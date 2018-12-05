@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, withRouter }  from 'react-router-dom'
 import MainHeader from './components/MainHeader'
 import Home from './components/Home'
@@ -14,7 +14,7 @@ import { Grid } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { fetchSignedInUser } from './redux/actions/fetch_signedInUser'
 
-class App extends Component {
+class App extends React.PureComponent {
   componentDidMount(){
     let token = localStorage.getItem('token')
     if(token && token !== "undefined"){
@@ -26,10 +26,10 @@ class App extends Component {
     return (
       <Grid id="page-grid" columns={2}>
         <Grid.Column className="mainheader-container" width={3}>
-          <Route path="/" render={(props) => <MainHeader router={props}/>}/>
+          <Route path="/" render={(props) => <MainHeader router={props} signedInUser={this.props.signedInUser}/>}/>
         </Grid.Column>
         <Grid.Column width={13}>
-          <Route exact path="/" render={() => <Home/>}/>
+          <Route exact path="/" render={(props) => <Home router={props}/>}/>
           <Route exact path="/about" render={() => <About/>}/>
           <Route exact path="/map" render={(props) => <MapContainer router={props}/>}/>
           <Route exact path="/search_trips/:input" render={(props) => <TripsContainer router={props}/>}/>

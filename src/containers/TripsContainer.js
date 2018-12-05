@@ -41,9 +41,9 @@ class TripsContainer extends React.Component{
       <div id="trips-page">
         <Grid id="trips-grid" centered columns={3}>
           <Grid.Row id="searchbar-row">
-            <Searchbar handleInputChange={this.handleInputChange} searchInput={this.state.searchInput}/>
+            <Searchbar id="searchbar" handleInputChange={this.handleInputChange} searchInput={this.state.searchInput}/>
           </Grid.Row>
-          <Grid.Row>
+          <Grid.Row id="trips-index-row-container">
             {this.filteredTrips()}
           </Grid.Row>
         </Grid>

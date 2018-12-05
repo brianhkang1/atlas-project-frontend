@@ -9,7 +9,7 @@ body, .normal-text{
   font-family: 'Philosopher', sans-serif;
 }
 
-#home-page, #about-page{
+#home-page{
   min-height: 102vh;
   background: url('./background-pics/background-1.jpg') !important;
   background-size: cover !important;
@@ -18,12 +18,12 @@ body, .normal-text{
 }
 
 
-/* #trips-page{
+#about-page{
   min-height: 102vh;
   background: url('./background-pics/background-2.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
-} */
+}
 
 #tripform-page{
   min-height: 200vh;
@@ -43,6 +43,36 @@ body, .normal-text{
 #header-title{
   font-size: 2em;
   font-family: 'Philosopher', sans-serif;
+}
+
+.pt-page-moveToTop {
+	-webkit-animation: moveToTop 1s ease both;
+	animation: moveToTop 1s ease both;
+}
+
+@-webkit-keyframes moveToTop {
+  from { }
+	to { -webkit-transform: translateY(-100%); }
+}
+
+.pt-page-moveFromBottom {
+	-webkit-animation: moveFromBottom 1s ease both;
+	animation: moveFromBottom 1s ease both;
+}
+
+@-webkit-keyframes moveFromBottom {
+	from { -webkit-transform: translateY(150%); }
+}
+
+#home-icon{
+  position: absolute;
+  left: 40%;
+  bottom: 5%;
+}
+
+#home-icon:hover{
+  transform: scale(1.5);
+  cursor: pointer;
 }
 
 .menu-item{
@@ -106,14 +136,14 @@ div.thirteen.wide.column{
   color: black;
   opacity: 0.7;
   font-size: 6em;
-  position: fixed;
-  left: 35%;
+  position: absolute !important;
+  left: 20%;
   top: 39%;
   font-family: 'Philosopher', sans-serif;
   /* font-weight: bold; */
 }
 
-a, .about-page-title, .show-page-title, .trip-show-summary, .trip-show-itinerary{
+.menu-item, .about-page-title, .show-page-title, .trip-show-summary, .trip-show-itinerary{
   font-family: 'Philosopher', sans-serif;
 }
 
@@ -125,7 +155,11 @@ a, .about-page-title, .show-page-title, .trip-show-summary, .trip-show-itinerary
 }
 
 #trips-grid{
-  padding-top: 5%;
+  padding-top: 1%;
+}
+
+#trips-index-row-container{
+  padding-top: 0px;
 }
 
 .overlay {
@@ -144,19 +178,56 @@ a, .about-page-title, .show-page-title, .trip-show-summary, .trip-show-itinerary
   text-align: center;
 }
 
-.trip-images:hover .overlay {
+.trip-images:hover .overlay{
   opacity: 0.7;
 }
 
-.trip-images:hover{
+.trip-images:hover, .liked-trip-images-container:hover{
   transform: scale(1.1);
+  cursor: pointer;
+}
+
+.liked-trip-images-container, .liked-trip-images-container img{
+  transition: all 0.3s;
+  width: 1100px;
+  height: 275px;
+  object-fit: cover;
+}
+.liked-trip-images-container{
+  position: relative;
+}
+
+.liked-trip-images-container img{
+  position: absolute !important;
+  text-align: center;
+}
+
+.liked-trip-image-text{
+  position: absolute !important;
+  bottom: 5%;
+  left: 3%;
+  font-family: 'Philosopher', sans-serif;
+  font-size: 2em;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+#page-grid > div.thirteen.wide.column > div > div > div{
+  margin: 0px;
 }
 
 .trip-images, .trip-images img{
   width: 407px;
-  height: 300px;
+  height: 345px;
   object-fit: cover;
   transition: all 0.3s;
+}
+
+.liked-trip-row{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  margin-top: 2%;
 }
 
 .trip-images-columns{
@@ -237,4 +308,5 @@ div.title{ /*accordion titles */
 
 #searchbar-row{
   background-color: rgb(30,30,30);
+  padding-left: 3%;
 }

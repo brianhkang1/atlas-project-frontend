@@ -1,5 +1,5 @@
 import React from 'react'
-import Trip from '../components/Trip'
+import LikedTrip from '../components/LikedTrip'
 import { connect } from 'react-redux'
 import { fetchAllTrips } from '../redux/actions/fetch_AllTrips'
 import { fetchSignedInUser } from '../redux/actions/fetch_signedInUser'
@@ -26,7 +26,7 @@ class LikedTripsContainer extends React.Component{
       return <div id="trip-form"><Segment align="center" inverted><p className="normal-text">You don't like any trips yet!</p></Segment></div>
     } else {
       return likedTripObjects.map(trip => {
-        return <Grid.Row><Trip key={trip.id} trip={trip} router={this.props.router}/></Grid.Row>
+        return <Grid.Row key={trip.id} className="liked-trip-row"><LikedTrip key={trip.id} trip={trip} router={this.props.router}/></Grid.Row>
       })
     }
   }
