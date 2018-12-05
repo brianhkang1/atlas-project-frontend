@@ -5,7 +5,7 @@ import whichCountry from 'pp-which-country'
 
 const TOKEN = 'pk.eyJ1IjoiYnJpYW5oa2FuZzEiLCJhIjoiY2pvcWdhcDBoMDBiOTNwbzhwYmZoZXdhcCJ9.OJ80JPnBiloxsbYIBuP5-Q';
 
-class Map extends React.Component {
+class Map extends React.PureComponent {
   constructor(props){
     super(props)
     this.state = {

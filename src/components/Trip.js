@@ -1,10 +1,10 @@
 import React from 'react'
-import { Grid, Image, Container } from 'semantic-ui-react'
+import { Image, Container } from 'semantic-ui-react'
 
 const BASE_URL = "http://localhost:3000"
 
 
-class Trip extends React.Component{
+class Trip extends React.PureComponent{
 
   handleImageClick = (event, routerProps) => {
     routerProps.history.push(`/trips/${this.props.trip.id}`)
@@ -18,15 +18,10 @@ class Trip extends React.Component{
 
   render(){
     return(
-      <Grid.Column className="trip-images-columns">
-        <Container className="trip-images">
-          <Image src={this.renderPhotos()}/>
-          <div className="overlay" onClick={(event) => this.handleImageClick(event, this.props.router)}>
-            <div>{this.props.trip.country_name.toUpperCase()}</div>
-            <div>posted by: {this.props.trip.creator.username}</div>
-          </div>
+        <Container className="trip-images-container">
+          <Image className="trip-images" src={this.renderPhotos()} onClick={(event) => this.handleImageClick(event, this.props.router)}/>
+          <div className="trip-image-text">{this.props.trip.country_name.toUpperCase()} | {this.props.trip.creator.username}</div>
         </Container>
-      </Grid.Column>
     )
   }
 }

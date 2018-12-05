@@ -1,11 +1,12 @@
 import React from 'react'
-import LikedTrip from '../components/LikedTrip'
+import Trip from '../components/Trip'
 import { connect } from 'react-redux'
 import { fetchAllTrips } from '../redux/actions/fetch_AllTrips'
 import { fetchSignedInUser } from '../redux/actions/fetch_signedInUser'
 import { Grid, Segment } from 'semantic-ui-react'
+import Infinite from 'react-infinite'
 
-class LikedTripsContainer extends React.Component{
+class LikedTripsContainer extends React.PureComponent{
   componentDidMount(){
     this.props.fetchAllTrips()
     let token = localStorage.getItem('token')
@@ -26,7 +27,9 @@ class LikedTripsContainer extends React.Component{
       return <div id="trip-form"><Segment align="center" inverted><p className="normal-text">You don't like any trips yet!</p></Segment></div>
     } else {
       return likedTripObjects.map(trip => {
-        return <Grid.Row key={trip.id} className="liked-trip-row"><LikedTrip key={trip.id} trip={trip} router={this.props.router}/></Grid.Row>
+        return <Grid.Row key={trip.id} className="trip-row">
+                <Trip key={trip.id} trip={trip} router={this.props.router}/>
+               </Grid.Row>
       })
     }
   }
@@ -42,7 +45,11 @@ class LikedTripsContainer extends React.Component{
             </Segment>
           </div>
           :
-          this.renderLikedTrips()
+          <div className="trips-index-row-container">
+            <Infinite containerHeight={620} elementHeight={310} useWindowAsScrollContainer>
+              {this.renderLikedTrips()}
+            </Infinite>
+          </div>
         }
       </Grid>
     )

@@ -2,7 +2,7 @@ import React from 'react'
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import { Accordion, Button, Icon, Image } from 'semantic-ui-react'
+import { Accordion, Icon, Image } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { fetchTrip } from '../redux/actions/fetch_Trip'
 
@@ -18,7 +18,7 @@ const sliderSettings = {
   arrows: true
 }
 
-class TripDetails extends React.Component{
+class TripDetails extends React.PureComponent{
   constructor(props){
     super(props)
     this.state = {
@@ -108,30 +108,30 @@ class TripDetails extends React.Component{
       <React.Fragment>
         {this.props.trip.length === 0 ? null :
           <div id="trip-show-page">
-
-            <h1 className="trip-show-page-title black-box">{this.renderTitle()}</h1>
-            <div className="trip-show-subheader">
-              <span className="trip-show-page-username">{this.props.trip.creator.username}</span>
-              <span className="trip-show-like">
+            <div className="trip-show-header-container black-box">
+              <h1>{this.renderTitle()}
+              <span>
                 {this.props.signedInUser.length === 0 ? null :
                   this.state.userLikesTrip ?
-                    <Button onClick={this.handleUnlikeClick}><Icon fitted color="red" name="heart"/></Button>
+                    <Icon id="heart" name="heart" size="large" onClick={this.handleUnlikeClick} color="red"/>
                     :
-                    <Button onClick={this.handleLikeClick}><Icon fitted name="heart"/></Button>
+                    <Icon id="heart" name="heart" size="large" onClick={this.handleLikeClick}/>
                 }
               </span>
+              </h1>
+              <div>{this.props.trip.creator.username}</div>
             </div>
 
             <Slider {...sliderSettings}>
               {this.renderPhotos()}
             </Slider>
 
-            <div className="trip-show-summary">
+            <div className="trip-show-overview-container">
               <h1 className="black-box">OVERVIEW</h1>
               <p className="trip-show-summary-content">{this.props.trip.summary}</p>
             </div>
 
-            <div className="trip-show-itinerary">
+            <div className="trip-show-itinerary-container">
               <h1 className="trip-show-itinerary-title black-box">ITINERARY</h1>
               <Accordion panels={this.renderItinerary()} exclusive={false} fluid />
             </div>

@@ -3,7 +3,7 @@ import TripForm from '../components/TripForm'
 import { connect } from 'react-redux'
 import { fetchRestCountriesAPI } from '../redux/actions/fetch_restcountriesAPI'
 
-class TripFormContainer extends React.Component{
+class TripFormContainer extends React.PureComponent{
 
   componentDidMount(){
     this.props.fetchRestCountriesAPI()

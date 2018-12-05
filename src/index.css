@@ -17,7 +17,6 @@ body, .normal-text{
   font-family: 'Philosopher', sans-serif;
 }
 
-
 #about-page{
   min-height: 102vh;
   background: url('./background-pics/background-2.jpg') !important;
@@ -68,11 +67,16 @@ body, .normal-text{
   position: absolute;
   left: 40%;
   bottom: 5%;
+  transition: all 0.3s;
 }
 
-#home-icon:hover{
+#home-icon:hover, #heart:hover{
   transform: scale(1.5);
   cursor: pointer;
+}
+
+#heart{
+  transition: all 0.3s;
 }
 
 .menu-item{
@@ -143,7 +147,7 @@ div.thirteen.wide.column{
   /* font-weight: bold; */
 }
 
-.menu-item, .about-page-title, .show-page-title, .trip-show-summary, .trip-show-itinerary{
+.menu-item, .about-page-title{
   font-family: 'Philosopher', sans-serif;
 }
 
@@ -158,51 +162,33 @@ div.thirteen.wide.column{
   padding-top: 1%;
 }
 
-#trips-index-row-container{
-  padding-top: 0px;
+.trips-index-row-container{
+  padding-top: 2%;
 }
 
-.overlay {
-  position: absolute;
-  bottom: 0;
-  background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0.5); /* Black see-through */
-  color: #f1f1f1;
-  height: 100%;
-  width: 100%;
-  transition: .5s ease;
-  opacity:0;
-  color: white;
-  font-size: 20px;
-  padding: 20%;
-  text-align: center;
-}
-
-.trip-images:hover .overlay{
-  opacity: 0.7;
-}
-
-.trip-images:hover, .liked-trip-images-container:hover{
+.trip-images:hover, .trip-images-container:hover{
   transform: scale(1.1);
   cursor: pointer;
 }
 
-.liked-trip-images-container, .liked-trip-images-container img{
+.trip-images-container, .trip-images-container img{
   transition: all 0.3s;
   width: 1100px;
   height: 275px;
+  left: 2%;
   object-fit: cover;
 }
-.liked-trip-images-container{
+
+.trip-images-container{
   position: relative;
+  overflow: hidden !important;
 }
 
-.liked-trip-images-container img{
-  position: absolute !important;
-  text-align: center;
+.trip-images-container img{
+  position: absolute;
 }
 
-.liked-trip-image-text{
+.trip-image-text{
   position: absolute !important;
   bottom: 5%;
   left: 3%;
@@ -217,14 +203,7 @@ div.thirteen.wide.column{
   margin: 0px;
 }
 
-.trip-images, .trip-images img{
-  width: 407px;
-  height: 345px;
-  object-fit: cover;
-  transition: all 0.3s;
-}
-
-.liked-trip-row{
+.trip-row{
   padding-left: 0px !important;
   padding-right: 0px !important;
   margin-top: 2%;
@@ -255,23 +234,6 @@ div.thirteen.wide.column{
   color: black !important;
 }
 
-.trip-show-page-title{
-  padding-left: 3%;
-  padding-bottom: 0px;
-}
-
-.trip-show-summary{
-  padding-bottom: 3%;
-  padding-top: 4%;
-  margin-left: 4%;
-  margin-right: 4%;
-}
-
-.trip-show-itinerary{
-  padding-bottom: 3%;
-  margin: 4%;
-}
-
 div.title{ /*accordion titles */
   border-bottom: solid;
   border-width: 1px;
@@ -288,8 +250,10 @@ div.title{ /*accordion titles */
   text-decoration: underline;
 }
 
-.trip-show-like{
-  padding-left: 4%;
+.trip-show-header-container, .trip-show-overview-container, .trip-show-itinerary-container{
+  padding-top: 3%;
+  padding-bottom: 3%;
+  margin: 4%;
 }
 
 .black-box{
@@ -301,9 +265,10 @@ div.title{ /*accordion titles */
   border-radius: 50px;
 }
 
-.trip-show-summary-content, .trip-show-subheader{
+.trip-show-summary-content{
   text-align: center;
   font-size: 1.3em;
+  padding-top: 2%;
 }
 
 #searchbar-row{

@@ -1,10 +1,16 @@
+<div className="overlay" onClick={(event) => this.handleImageClick(event, this.props.router)}>
+  <div>{this.props.trip.country_name.toUpperCase()}</div>
+  <div>posted by: {this.props.trip.creator.username}</div>
+</div>
+
+
 import React from 'react'
 import { Image, Container } from 'semantic-ui-react'
 
 const BASE_URL = "http://localhost:3000"
 
 
-class LikedTrip extends React.Component{
+class LikedTrip extends React.PureComponent{
 
   handleImageClick = (event, routerProps) => {
     routerProps.history.push(`/trips/${this.props.trip.id}`)
@@ -18,9 +24,9 @@ class LikedTrip extends React.Component{
 
   render(){
     return(
-        <Container className="liked-trip-images-container">
-          <Image className="liked-trip-images" src={this.renderPhotos()} onClick={(event) => this.handleImageClick(event, this.props.router)}/>
-          <div className="liked-trip-image-text">{this.props.trip.country_name.toUpperCase()} | {this.props.trip.creator.username}</div>
+        <Container className="trip-images-container">
+          <Image className="trip-images" src={this.renderPhotos()} onClick={(event) => this.handleImageClick(event, this.props.router)}/>
+          <div className="trip-image-text">{this.props.trip.country_name.toUpperCase()} | {this.props.trip.creator.username}</div>
         </Container>
     )
   }

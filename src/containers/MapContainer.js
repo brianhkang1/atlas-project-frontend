@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { fetchRestCountriesAPI } from '../redux/actions/fetch_restcountriesAPI'
 import { fetchAllTrips } from '../redux/actions/fetch_AllTrips'
 
-class MapContainer extends React.Component{
+class MapContainer extends React.PureComponent{
 
   componentDidMount(){
     this.props.fetchRestCountriesAPI()

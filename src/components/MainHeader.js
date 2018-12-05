@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Menu, Sidebar } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../redux/actions/logout'
 
-class MainHeader extends Component {
+class MainHeader extends React.PureComponent {
   constructor(props){
     super(props)
     this.state = {

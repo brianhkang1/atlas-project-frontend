@@ -3,7 +3,7 @@ import {Segment, Form, Button} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { signInUser } from '../redux/actions/signInUser'
 
-class Signup extends React.Component {
+class Signup extends React.PureComponent {
   constructor(props){
     super(props)
     this.state = {

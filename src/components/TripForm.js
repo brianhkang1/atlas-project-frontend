@@ -4,7 +4,7 @@ import ImageUploader from 'react-images-upload'
 
 const TRIPS_URL = `http://localhost:3000/api/v1/trips`
 
-class TripForm extends React.Component {
+class TripForm extends React.PureComponent {
   constructor(props){
     super(props)
     this.state = {
