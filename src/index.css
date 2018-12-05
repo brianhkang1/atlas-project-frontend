@@ -1,49 +1,28 @@
-/* body{
-  min-height: 100vh;
-  background: url('./background-pics/background-1.jpg') !important;
-  background-size: cover !important;
-  background-attachment: fixed !important;
-} */
-
-body, .normal-text{
-  font-family: 'Philosopher', sans-serif;
-}
-
-#home-page{
+#home-page, #about-page{
   min-height: 102vh;
   background: url('./background-pics/background-1.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
-  font-family: 'Philosopher', sans-serif;
 }
 
-#about-page{
-  min-height: 102vh;
-  background: url('./background-pics/background-2.jpg') !important;
-  background-size: cover !important;
-  background-attachment: fixed !important;
-}
-
-#tripform-page{
-  min-height: 200vh;
-  background: url('./background-pics/background-4.jpg') !important;
-  background-size: cover !important;
-  background-attachment: fixed !important;
+body, .normal-text, .menu-item, .about-page-title, #trip-show-title, #trip-show-username, #trip-show-heart-text, .black-box, .trip-show-summary-content, .trip-show-itinerary-content{
   font-family: 'Philosopher', sans-serif;
 }
 
 #signup-page, #login-page{
   min-height: 102vh;
-  background: url('./background-pics/background-3.jpg') !important;
+  background: url('./background-pics/background-4.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
 }
 
-#header-title{
-  font-size: 2em;
+#atlas{
+  /*home page title*/
+  font-size: 3.8em;
   font-family: 'Philosopher', sans-serif;
 }
 
+/* page transition animations */
 .pt-page-moveToTop {
 	-webkit-animation: moveToTop 1s ease both;
 	animation: moveToTop 1s ease both;
@@ -51,17 +30,18 @@ body, .normal-text{
 
 @-webkit-keyframes moveToTop {
   from { }
-	to { -webkit-transform: translateY(-100%); }
+	to { -webkit-transform: translateY(-350%); }
 }
 
 .pt-page-moveFromBottom {
-	-webkit-animation: moveFromBottom 1s ease both;
-	animation: moveFromBottom 1s ease both;
+	-webkit-animation: moveFromBottom 1.25s ease both;
+	animation: moveFromBottom 1.25s ease both;
 }
 
 @-webkit-keyframes moveFromBottom {
 	from { -webkit-transform: translateY(150%); }
 }
+/* end of page transition animations */
 
 #home-icon{
   position: absolute;
@@ -143,11 +123,6 @@ div.thirteen.wide.column{
   position: absolute !important;
   left: 20%;
   top: 39%;
-  font-family: 'Philosopher', sans-serif;
-  /* font-weight: bold; */
-}
-
-.menu-item, .about-page-title{
   font-family: 'Philosopher', sans-serif;
 }
 
@@ -239,6 +214,9 @@ div.title{ /*accordion titles */
   border-width: 1px;
   border-bottom-color: black;
   font-size: 1.4em !important;
+  font-weight: bold !important;
+  text-align: left !important;
+  font-family: 'Philosopher', sans-serif !important;
 }
 
 .delete-pin-text, .be-the-first, .see-trips-for{
@@ -250,10 +228,23 @@ div.title{ /*accordion titles */
   text-decoration: underline;
 }
 
-.trip-show-header-container, .trip-show-overview-container, .trip-show-itinerary-container{
+.trip-show-overview-container, .trip-show-itinerary-container{
   padding-top: 3%;
   padding-bottom: 3%;
   margin: 4%;
+}
+
+#trip-show-header{
+  background: rgb(30,30,30);
+  color: white;
+}
+
+.trip-show-header-container{
+  padding-top: 5%;
+  margin-left: 4%;
+  margin-right: 4%;
+  padding-left: 4%;
+  padding-bottom: 1%;
 }
 
 .black-box{
@@ -261,14 +252,29 @@ div.title{ /*accordion titles */
   padding-bottom: 2%;
   background-color: rgb(30,30,30);
   color: white;
-  text-align: center;
   border-radius: 50px;
+  text-align: center;
+}
+
+#trip-show-title{
+  font-size: 3em;
+  font-weight: bold;
+  padding-bottom: 2%;
+}
+
+#trip-show-username, #trip-show-heart-text{
+  font-size: 1.5em;
+  padding-bottom: 1%;
 }
 
 .trip-show-summary-content{
   text-align: center;
   font-size: 1.3em;
   padding-top: 2%;
+}
+
+.trip-show-itinerary-content{
+  font-size: 1.3em;
 }
 
 #searchbar-row{

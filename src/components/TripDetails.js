@@ -18,7 +18,7 @@ const sliderSettings = {
   arrows: true
 }
 
-class TripDetails extends React.PureComponent{
+class TripDetails extends React.Component{
   constructor(props){
     super(props)
     this.state = {
@@ -31,6 +31,8 @@ class TripDetails extends React.PureComponent{
   }
 
   componentDidUpdate(prevProps){
+    console.log("I am updating")
+
     if((this.props.trip.length !== 0 && this.props.signedInUser.length !== 0) && (this.props.trip !== prevProps.trip || this.props.signedInUser !== prevProps.signedInUser)){
       if(this.props.trip.trip_likers.find(likers => likers.id === this.props.signedInUser[0].id)){
         this.setState({userLikesTrip: true})
@@ -80,7 +82,10 @@ class TripDetails extends React.PureComponent{
         "Authorization" : `Bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify(body)
-    }).then(this.setState({userLikesTrip: true}))
+    }).then(res => {
+      this.setState({userLikesTrip: true})
+      this.props.fetchTrip(this.props.tripId)
+    })
   }
 
   handleUnlikeClick = (event) => {
@@ -89,18 +94,22 @@ class TripDetails extends React.PureComponent{
       .then(json => {
         let tripLikeId = json.find(like => like.trip_liker_id === this.props.signedInUser[0].id && like.liked_trip_id === this.props.tripId).id
         this.deleteTripLikeBackend(tripLikeId)
+          .then(res => {
+            this.setState({userLikesTrip: false})
+            this.props.fetchTrip(this.props.tripId)
+          })
       })
   }
 
   deleteTripLikeBackend = (tripLikeId) => {
-    fetch(`http://localhost:3000/api/v1/trip_likes/${tripLikeId}`,{
+    return fetch(`http://localhost:3000/api/v1/trip_likes/${tripLikeId}`,{
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
         "Authorization" : `Bearer ${localStorage.getItem('token')}`
       }
-    }).then(this.setState({userLikesTrip: false}))
+    })
   }
 
   render(){
@@ -108,18 +117,19 @@ class TripDetails extends React.PureComponent{
       <React.Fragment>
         {this.props.trip.length === 0 ? null :
           <div id="trip-show-page">
-            <div className="trip-show-header-container black-box">
-              <h1>{this.renderTitle()}
-              <span>
+            <div id="trip-show-header">
+            <div className="trip-show-header-container">
+              <div id="trip-show-title">{this.renderTitle()}</div>
+              <div id="trip-show-username">posted by: {this.props.trip.creator.username}</div>
+              <div id="trip-show-heart-text">
                 {this.props.signedInUser.length === 0 ? null :
                   this.state.userLikesTrip ?
                     <Icon id="heart" name="heart" size="large" onClick={this.handleUnlikeClick} color="red"/>
                     :
                     <Icon id="heart" name="heart" size="large" onClick={this.handleLikeClick}/>
-                }
-              </span>
-              </h1>
-              <div>{this.props.trip.creator.username}</div>
+                } liked by {this.props.trip.trip_likers.length} explorers
+              </div>
+              </div>
             </div>
 
             <Slider {...sliderSettings}>
@@ -132,8 +142,8 @@ class TripDetails extends React.PureComponent{
             </div>
 
             <div className="trip-show-itinerary-container">
-              <h1 className="trip-show-itinerary-title black-box">ITINERARY</h1>
-              <Accordion panels={this.renderItinerary()} exclusive={false} fluid />
+              <h1 className="black-box">ITINERARY</h1>
+              <Accordion className="trip-show-itinerary-content" panels={this.renderItinerary()} exclusive={false} fluid />
             </div>
 
           </div>

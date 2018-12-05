@@ -12,14 +12,14 @@ class Home extends React.PureComponent{
 
   handleClick = (event, routerProps) => {
     this.setState({pageMoveToTop: "pt-page-moveToTop"})
-    setTimeout(() => routerProps.history.push('/about'), 1000);
+    setTimeout(() => routerProps.history.push('/about'), 900);
   }
 
 
   render(){
     return(
-      <div id="home-page" className={this.state.pageMoveToTop}>
-        <h1 id="home-title">ATLAS</h1>
+      <div id="home-page">
+        <h1 id="home-title" className={this.state.pageMoveToTop}>ATLAS</h1>
         <div><Icon size="huge" id="home-icon" name="chevron down" onClick={(event) => this.handleClick(event, this.props.router)}/></div>
       </div>
     )
