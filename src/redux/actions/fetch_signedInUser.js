@@ -1,7 +1,7 @@
 export function fetchSignedInUser() {
   return (dispatch) => {
     dispatch({ type: 'FETCHING_SIGNEDINUSER' });
-    return fetch(`${process.env.REACT_APP_BASE_URL}/api/v1/profile`, {
+    return fetch(`https://atlas-demo-backend.herokuapp.com/api/v1/profile`, {
       headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
     })
       .then(response => response.json())

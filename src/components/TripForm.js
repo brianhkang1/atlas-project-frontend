@@ -2,7 +2,7 @@ import React from 'react'
 import {Segment, Form, Button, Icon, Input} from 'semantic-ui-react'
 import ImageUploader from 'react-images-upload'
 
-const BASE_URL = `${process.env.REACT_APP_BASE_URL}`
+const BASE_URL = `https://atlas-demo-backend.herokuapp.com`
 
 class TripForm extends React.PureComponent {
   constructor(props){

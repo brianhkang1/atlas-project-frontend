@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, Container } from 'semantic-ui-react'
 
-const BASE_URL = `${process.env.REACT_APP_BASE_URL}`
+const BASE_URL = `https://atlas-demo-backend.herokuapp.com`
 
 
 class Trip extends React.PureComponent{

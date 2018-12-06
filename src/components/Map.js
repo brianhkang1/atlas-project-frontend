@@ -4,7 +4,7 @@ import whichCountry from 'pp-which-country'
 import ReactMapGL, { NavigationControl, Marker, Popup } from 'react-map-gl';
 import MapboxGeocoder from 'mapbox-gl-geocoder'
 
-const BASE_URL = `${process.env.REACT_APP_BASE_URL}`
+const BASE_URL = `https://atlas-demo-backend.herokuapp.com`
 
 class Map extends React.PureComponent {
   constructor(props){

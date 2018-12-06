@@ -3,7 +3,7 @@ import {Segment, Form, Button} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { signInUser } from '../redux/actions/signInUser'
 
-const BASE_URL = `${process.env.REACT_APP_BASE_URL}`
+const BASE_URL = `https://atlas-demo-backend.herokuapp.com`
 
 class Signup extends React.PureComponent {
   constructor(props){

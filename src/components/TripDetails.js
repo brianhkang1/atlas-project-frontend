@@ -6,7 +6,7 @@ import { Accordion, Icon, Image } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { fetchTrip } from '../redux/actions/fetch_Trip'
 
-const BASE_URL = `${process.env.REACT_APP_BASE_URL}`
+const BASE_URL = `https://atlas-demo-backend.herokuapp.com`
 
 const sliderSettings = {
   dots: true,
