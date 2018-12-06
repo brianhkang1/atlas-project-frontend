@@ -41,7 +41,7 @@ class LikedTripsContainer extends React.PureComponent{
           this.props.signedInUser.length === 0 || this.props.tripsList.length === 0 ?
           <div id="trip-form">
             <Segment inverted align="center">
-              <p className="normal-text">You must be signed in to see liked trips.</p>
+              <p className="you-must-be-signed-in">You must be signed in to see liked trips.</p>
             </Segment>
           </div>
           :

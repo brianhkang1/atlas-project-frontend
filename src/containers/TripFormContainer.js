@@ -2,6 +2,7 @@ import React from 'react'
 import TripForm from '../components/TripForm'
 import { connect } from 'react-redux'
 import { fetchRestCountriesAPI } from '../redux/actions/fetch_restcountriesAPI'
+import { fetchSignedInUser } from '../redux/actions/fetch_signedInUser'
 
 class TripFormContainer extends React.PureComponent{
 
@@ -11,7 +12,7 @@ class TripFormContainer extends React.PureComponent{
 
   render(){
     return(
-      <TripForm signedInUser={this.props.signedInUser} countryList={this.props.countryList} router={this.props.router}/>
+      <TripForm signedInUser={this.props.signedInUser} fetchSignedInUser={this.props.fetchSignedInUser} countryList={this.props.countryList} router={this.props.router}/>
     )
   }
 }
@@ -24,7 +25,10 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {fetchRestCountriesAPI: () => dispatch(fetchRestCountriesAPI())}
+  return {
+    fetchRestCountriesAPI: () => dispatch(fetchRestCountriesAPI()),
+    fetchSignedInUser: () => dispatch(fetchSignedInUser())
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TripFormContainer)

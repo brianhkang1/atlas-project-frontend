@@ -5,14 +5,13 @@ class Home extends React.PureComponent{
   constructor(props){
     super(props)
     this.state={
-      pageMoveToTop: null,
-      homeTitle: "home-title"
+      pageMoveToTop: null
     }
   }
 
   handleClick = (event, routerProps) => {
     this.setState({pageMoveToTop: "pt-page-moveToTop"})
-    setTimeout(() => routerProps.history.push('/about'), 900);
+    setTimeout(() => routerProps.history.push('/about'), 1000);
   }
 
 

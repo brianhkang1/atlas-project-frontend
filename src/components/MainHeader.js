@@ -33,7 +33,6 @@ class MainHeader extends React.PureComponent {
         <Menu.Item className="menu-item" align="right" name={`WELCOME ${this.props.signedInUser[0].username.toUpperCase()}`}/>
         }
         <Menu.Item />
-        <Menu.Item />
         <Menu.Item className="menu-item" as={ NavLink } exact to="/"
           align="right"
           name='HOME'

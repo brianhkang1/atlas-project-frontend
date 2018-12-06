@@ -85,10 +85,12 @@ class TripForm extends React.PureComponent {
       },
       body: formData
     }).then(res => res.json()).then(json => {
-      // this.props.fetchAllRecipes()
       if (json.error){
         alert("Form could not be posted. Please make sure all fields are filled out.")
-      } else { routerProps.history.push(`/trips/${json.id}`) }
+      } else {
+        this.props.fetchSignedInUser()
+        routerProps.history.push(`/trips/${json.id}`)
+      }
     })
   }
 
@@ -98,7 +100,7 @@ class TripForm extends React.PureComponent {
       <div id="trip-form">
       {this.props.signedInUser.length === 0 ?
         <Segment inverted align="center">
-          <p className="normal-text">You must be signed in to post a trip.</p>
+          <p className="you-must-be-signed-in">You must be signed in to post a trip.</p>
         </Segment>
         :
         <Form onSubmit={(event) => this.handleSubmit(event, this.props.router)}>
