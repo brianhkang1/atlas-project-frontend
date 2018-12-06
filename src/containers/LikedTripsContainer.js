@@ -26,7 +26,7 @@ class LikedTripsContainer extends React.PureComponent{
     if(likedTripObjects.length === 0){
       return <div id="trip-form"><Segment align="center" inverted><p className="normal-text">You don't like any trips yet!</p></Segment></div>
     } else {
-      return likedTripObjects.map(trip => {
+      return likedTripObjects.reverse().map(trip => {
         return <Grid.Row key={trip.id} className="trip-row">
                 <Trip key={trip.id} trip={trip} router={this.props.router}/>
                </Grid.Row>
@@ -46,7 +46,7 @@ class LikedTripsContainer extends React.PureComponent{
           </div>
           :
           <div className="trips-index-row-container">
-            <Infinite containerHeight={620} elementHeight={310} useWindowAsScrollContainer>
+            <Infinite containerHeight={900} elementHeight={340} >
               {this.renderLikedTrips()}
             </Infinite>
           </div>

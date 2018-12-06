@@ -29,9 +29,9 @@ class TripsContainer extends React.PureComponent{
     this.setState({searchInput: event.target.value})
   }
 
-  filteredTrips = () => {
+  renderFilteredTrips = () => {
     let filteredTripList = this.props.tripsList.filter(trip => trip.country_name.toLowerCase().includes(this.state.searchInput.toLowerCase()))
-    return filteredTripList.map(trip => {
+    return filteredTripList.reverse().map(trip => {
       return <Grid.Row key={trip.id} className="trip-row">
               <Trip key={trip.id} trip={trip} signedInUser={this.props.signedInUser} router={this.props.router}/>
              </Grid.Row>
@@ -46,8 +46,8 @@ class TripsContainer extends React.PureComponent{
             <Searchbar id="searchbar" handleInputChange={this.handleInputChange} searchInput={this.state.searchInput}/>
           </Grid.Row>
           <div className="trips-index-row-container">
-            <Infinite  containerHeight={620} elementHeight={310} useWindowAsScrollContainer>
-              {this.filteredTrips()}
+            <Infinite  containerHeight={900} elementHeight={340} >
+              {this.renderFilteredTrips()}
             </Infinite>
           </div>
         </Grid>

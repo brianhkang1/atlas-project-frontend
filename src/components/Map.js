@@ -9,7 +9,7 @@ class Map extends React.PureComponent {
     super(props)
     this.state = {
       viewport: {
-        width: "100%",
+        width: "99%", //100% on macbook screen
         height: "100vh",
         latitude: 44.5739,
         longitude: 7.7952,
@@ -204,8 +204,8 @@ class Map extends React.PureComponent {
             </div>
             <br/>
             <div id="mapCoordinateDisplay" style={{position: 'absolute', left: 3, bottom: 30, margin: 10}}>
+              <div>Countries you have posted on are highlighted</div>
               <div>Double click to pin countries you'd like to visit</div>
-              <div>Countries you've posted in are highlighted</div>
             </div>
           </div>
           <div style={{position: 'absolute', right: 0, top: 40, padding: 25}}>

@@ -10,7 +10,7 @@ body, .normal-text, .menu-item, .about-page-title, #trip-show-title, #trip-show-
 }
 
 #signup-page, #login-page, #tripform-page{
-  min-height: 102vh;
+  min-height: 200vh;
   background: url('./background-pics/background-4.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
@@ -57,16 +57,16 @@ body, .normal-text, .menu-item, .about-page-title, #trip-show-title, #trip-show-
   cursor: pointer;
 }
 
+#add-button:hover, #delete-button:hover{
+  cursor: pointer;
+}
+
 #heart{
   transition: all 0.3s;
 }
 
 .menu-item{
   font-size: 1.3em;
-}
-
-.non-header-content{
-  top: 50%;
 }
 
 div.thirteen.wide.column{
@@ -95,7 +95,7 @@ div.thirteen.wide.column{
   min-width: 30%;
   position: absolute;
   left: 35%;
-  top: 40%;
+  top: 20%;
 }
 
 #about{
@@ -146,9 +146,9 @@ div.thirteen.wide.column{
 
 .trip-images-container, .trip-images-container img{
   transition: all 0.3s;
-  width: 1100px;
+  width: 1000px; /* 1100px on macbook screen */
   height: 275px;
-  left: 2%;
+  left: 2.75%; /* 2% on macbook screen */
   object-fit: cover;
 }
 
@@ -164,7 +164,7 @@ div.thirteen.wide.column{
 .trip-image-text{
   position: absolute !important;
   bottom: 5%;
-  left: 3%;
+  left: 4%; /* 3% on macbook screen */
   font-family: 'Philosopher', sans-serif;
   font-size: 2em;
   text-align: center;
