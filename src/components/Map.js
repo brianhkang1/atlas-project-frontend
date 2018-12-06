@@ -1,9 +1,8 @@
 import React from 'react'
-import ReactMapGL, { NavigationControl, Marker, Popup } from 'react-map-gl';
 import { Icon } from 'semantic-ui-react'
 import whichCountry from 'pp-which-country'
-
-const TOKEN = 'pk.eyJ1IjoiYnJpYW5oa2FuZzEiLCJhIjoiY2pvcWdhcDBoMDBiOTNwbzhwYmZoZXdhcCJ9.OJ80JPnBiloxsbYIBuP5-Q';
+import ReactMapGL, { NavigationControl, Marker, Popup } from 'react-map-gl';
+import MapboxGeocoder from 'mapbox-gl-geocoder'
 
 class Map extends React.PureComponent {
   constructor(props){
@@ -24,7 +23,10 @@ class Map extends React.PureComponent {
 
   componentDidMount(){
     const map = this.reactMap.getMap()
-    map.on('load', () => this.addLayer(map, this.props.countryCodes()))
+    map.on('load', () => {
+      this.addLayer(map, this.props.countryCodes())
+      map.addControl(new MapboxGeocoder({accessToken: process.env.REACT_APP_MAPBOX_API_KEY}))
+    })
   }
 
   addLayer = (map, countryCodes) => {
@@ -136,7 +138,7 @@ class Map extends React.PureComponent {
 
   renderMarkers = () => {
     return this.state.pinned_locations.length !== 0 && this.state.pinned_locations.map(loc => {
-      return <Marker ref={`marker-${loc.id}`} key={loc.id} longitude={parseFloat(loc.longitude)} latitude={parseFloat(loc.latitude)} offsetLeft={-11} offsetTop={-20}><Icon size="large" name="map pin" color="red" onClick={(event) => this.handleMarkerClick(event, parseFloat(loc.longitude), parseFloat(loc.latitude))}/></Marker>
+      return <Marker key={loc.id} longitude={parseFloat(loc.longitude)} latitude={parseFloat(loc.latitude)} offsetLeft={-11} offsetTop={-20}><Icon size="large" name="map pin" color="red" onClick={(event) => this.handleMarkerClick(event, parseFloat(loc.longitude), parseFloat(loc.latitude))}/></Marker>
     })
   }
 
@@ -187,11 +189,12 @@ class Map extends React.PureComponent {
           ref={(reactMap) => { this.reactMap = reactMap; }}
           {...this.state.viewport}
           mapStyle="mapbox://styles/mapbox/light-v9"
-          mapboxApiAccessToken={TOKEN}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API_KEY}
           onViewportChange={(viewport) => this.setState({viewport})}
           minZoom={1.19}
-          onClick={this.handleMapClick}
+          onDblClick={this.handleMapClick}
           getCursor={this.getCursor}
+          doubleClickZoom={false}
         >
         {this.props.signedInUser.length === 0 ? null : this.renderMarkers()}
         {this.renderPopup()}
@@ -200,12 +203,12 @@ class Map extends React.PureComponent {
               <div>{`Latitude: ${this.state.viewport.latitude.toFixed(4)} // Longitude: ${this.state.viewport.longitude.toFixed(4)} // Zoom: ${this.state.viewport.zoom.toFixed(2)}`}</div>
             </div>
             <br/>
-            <div id="mapCoordinateDisplay">
+            <div id="mapCoordinateDisplay" style={{position: 'absolute', left: 3, bottom: 30, margin: 10}}>
+              <div>Double click to pin countries you'd like to visit</div>
               <div>Countries you've posted in are highlighted</div>
-              <div>Left click to pin countries you'd like to visit</div>
             </div>
           </div>
-          <div style={{position: 'absolute', right: 0, top: 0, padding: 25}}>
+          <div style={{position: 'absolute', right: 0, top: 40, padding: 25}}>
            <NavigationControl onViewportChange={(viewport) => this.setState({viewport})} showCompass={false} />
          </div>
       </ReactMapGL>
