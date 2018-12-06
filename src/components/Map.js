@@ -4,6 +4,8 @@ import whichCountry from 'pp-which-country'
 import ReactMapGL, { NavigationControl, Marker, Popup } from 'react-map-gl';
 import MapboxGeocoder from 'mapbox-gl-geocoder'
 
+const BASE_URL = `${process.env.REACT_APP_BASE_URL}`
+
 class Map extends React.PureComponent {
   constructor(props){
     super(props)
@@ -126,7 +128,7 @@ class Map extends React.PureComponent {
 
 
   deletePinBackend = (pinIdToDelete) => {
-    fetch(`http://localhost:3000/api/v1/pinned_locations/${pinIdToDelete}`, {
+    fetch(`${BASE_URL}/api/v1/pinned_locations/${pinIdToDelete}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -163,7 +165,7 @@ class Map extends React.PureComponent {
     if(body.country === null){
       alert("You can't pin the ocean")
     } else {
-      fetch(`http://localhost:3000/api/v1/pinned_locations`, {
+      fetch(`${BASE_URL}/api/v1/pinned_locations`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",

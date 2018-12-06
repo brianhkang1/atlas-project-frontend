@@ -3,6 +3,8 @@ import {Segment, Form, Button} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { signInUser } from '../redux/actions/signInUser'
 
+const BASE_URL = `${process.env.REACT_APP_BASE_URL}`
+
 class Signup extends React.PureComponent {
   constructor(props){
     super(props)
@@ -37,7 +39,7 @@ class Signup extends React.PureComponent {
       }
     }
 
-    fetch(`http://localhost:3000/api/v1/users`, {
+    fetch(`${BASE_URL}/api/v1/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

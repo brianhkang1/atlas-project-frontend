@@ -2,7 +2,7 @@ import React from 'react'
 import {Segment, Form, Button, Icon, Input} from 'semantic-ui-react'
 import ImageUploader from 'react-images-upload'
 
-const TRIPS_URL = `http://localhost:3000/api/v1/trips`
+const BASE_URL = `${process.env.REACT_APP_BASE_URL}`
 
 class TripForm extends React.PureComponent {
   constructor(props){
@@ -78,7 +78,7 @@ class TripForm extends React.PureComponent {
     formData.append("itinerary", iti)
     formData.append("locations", loc)
 
-    fetch(TRIPS_URL, {
+    fetch(`${BASE_URL}/api/v1/trips`, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`

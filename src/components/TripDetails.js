@@ -6,7 +6,7 @@ import { Accordion, Icon, Image } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { fetchTrip } from '../redux/actions/fetch_Trip'
 
-const BASE_URL = "http://localhost:3000"
+const BASE_URL = `${process.env.REACT_APP_BASE_URL}`
 
 const sliderSettings = {
   dots: true,
@@ -74,7 +74,7 @@ class TripDetails extends React.Component{
       liked_trip_id: this.props.tripId
     }
 
-    fetch(`http://localhost:3000/api/v1/trip_likes`, {
+    fetch(`${BASE_URL}/api/v1/trip_likes`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -89,7 +89,7 @@ class TripDetails extends React.Component{
   }
 
   handleUnlikeClick = (event) => {
-    fetch(`http://localhost:3000/api/v1/trip_likes`)
+    fetch(`${BASE_URL}/api/v1/trip_likes`)
       .then(res => res.json())
       .then(json => {
         let tripLikeId = json.find(like => like.trip_liker_id === this.props.signedInUser[0].id && like.liked_trip_id === this.props.tripId).id
@@ -102,7 +102,7 @@ class TripDetails extends React.Component{
   }
 
   deleteTripLikeBackend = (tripLikeId) => {
-    return fetch(`http://localhost:3000/api/v1/trip_likes/${tripLikeId}`,{
+    return fetch(`${BASE_URL}/api/v1/trip_likes/${tripLikeId}`,{
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
