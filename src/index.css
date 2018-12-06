@@ -4,6 +4,7 @@ body, .normal-text, .menu-item, .about-page-title, #trip-show-title, #trip-show-
 
 #home-page, #about-page{
   min-height: 102vh;
+  min-width: 100vw;
   background: url('./background-pics/background-1.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
@@ -11,6 +12,7 @@ body, .normal-text, .menu-item, .about-page-title, #trip-show-title, #trip-show-
 
 #signup-page, #login-page, #tripform-page{
   min-height: 200vh;
+  min-width: 100vw;
   background: url('./background-pics/background-4.jpg') !important;
   background-size: cover !important;
   background-attachment: fixed !important;
@@ -137,6 +139,7 @@ div.thirteen.wide.column{
 
 .trips-index-row-container{
   padding-top: 2%;
+  width: 100%;
 }
 
 .trip-images:hover, .trip-images-container:hover{
@@ -144,12 +147,19 @@ div.thirteen.wide.column{
   cursor: pointer;
 }
 
-.trip-images-container, .trip-images-container img{
+.trip-images-container{
   transition: all 0.3s;
-  width: 1000px; /* 1100px on macbook screen */
+  width: 100%; /* 1100px on macbook screen */
   height: 275px;
-  left: 2.75%; /* 2% on macbook screen */
   object-fit: cover;
+}
+
+.trip-images-container img{
+  transition: all 0.3s;
+  width: 94%; /* 1100px on macbook screen */
+  height: 275px;
+  object-fit: cover;
+  left: 3%
 }
 
 .trip-images-container{
@@ -164,7 +174,7 @@ div.thirteen.wide.column{
 .trip-image-text{
   position: absolute !important;
   bottom: 5%;
-  left: 4%; /* 3% on macbook screen */
+  left: 6%;
   font-family: 'Philosopher', sans-serif;
   font-size: 2em;
   text-align: center;
@@ -282,4 +292,8 @@ div.title{ /*accordion titles */
 
 .you-must-be-signed-in{
   font-size: 2em;
+}
+
+.mapboxgl-ctrl-geocoder{
+  right: 5%;
 }

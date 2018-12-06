@@ -11,7 +11,7 @@ class Map extends React.PureComponent {
     super(props)
     this.state = {
       viewport: {
-        width: "99%", //100% on macbook screen
+        width: "100%", //100% on macbook screen
         height: "100vh",
         latitude: 44.5739,
         longitude: 7.7952,
