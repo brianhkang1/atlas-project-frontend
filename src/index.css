@@ -11,7 +11,7 @@ body, .normal-text, .menu-item, .about-page-title, #trip-show-title, #trip-show-
 }
 
 #signup-page, #login-page, #tripform-page{
-  min-height: 200vh;
+  min-height: 300vh;
   min-width: 100vw;
   background: url('./background-pics/background-4.jpg') !important;
   background-size: cover !important;
