@@ -11,7 +11,7 @@ class Home extends React.PureComponent{
 
   handleClick = (event, routerProps) => {
     this.setState({pageMoveToTop: "pt-page-moveToTop"})
-    setTimeout(() => routerProps.history.push('/about'), 1000);
+    setTimeout(() => routerProps.history.push('/about'), 1000); //wait one second before transitioning to about page
   }
 
 

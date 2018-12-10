@@ -7,6 +7,7 @@ import { fetchSignedInUser } from '../redux/actions/fetch_signedInUser'
 class TripFormContainer extends React.PureComponent{
 
   componentDidMount(){
+    //fetch country names to use in datalist 
     this.props.fetchRestCountriesAPI()
   }
 

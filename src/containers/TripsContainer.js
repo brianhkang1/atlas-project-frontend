@@ -46,7 +46,7 @@ class TripsContainer extends React.PureComponent{
             <Searchbar id="searchbar" handleInputChange={this.handleInputChange} searchInput={this.state.searchInput}/>
           </Grid.Row>
           <div className="trips-index-row-container">
-            <Infinite  containerHeight={900} elementHeight={340} >
+            <Infinite  containerHeight={1200} elementHeight={340} >
               {this.renderFilteredTrips()}
             </Infinite>
           </div>

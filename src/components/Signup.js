@@ -3,7 +3,7 @@ import {Segment, Form, Button} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { signInUser } from '../redux/actions/signInUser'
 
-const BASE_URL = `https://atlas-demo-backend.herokuapp.com`
+const BASE_URL = `http://localhost:3000`
 
 class Signup extends React.PureComponent {
   constructor(props){
@@ -39,6 +39,7 @@ class Signup extends React.PureComponent {
       }
     }
 
+    //send new user info via post request to users backend model
     fetch(`${BASE_URL}/api/v1/users`, {
       method: "POST",
       headers: {
@@ -51,6 +52,7 @@ class Signup extends React.PureComponent {
         if(!json.jwt || !json.user ){
           alert("Username already taken")
         } else {
+          //if successfully created on backend, store new token and sign user in 
           localStorage.setItem("token", json.jwt)
           this.props.signInUser(json.user)
           routerProps.history.push("/search_trips")

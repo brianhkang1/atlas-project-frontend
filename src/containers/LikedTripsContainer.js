@@ -16,6 +16,7 @@ class LikedTripsContainer extends React.PureComponent{
   }
 
   renderLikedTrips = () => {
+    //need to get each trip object first, then render 
     let likedTripObjects = []
     let likedTripIds = this.props.signedInUser[0].liked_trips.map(trip => trip.id)
 

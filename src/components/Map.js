@@ -4,14 +4,14 @@ import whichCountry from 'pp-which-country'
 import ReactMapGL, { NavigationControl, Marker, Popup } from 'react-map-gl';
 import MapboxGeocoder from 'mapbox-gl-geocoder'
 
-const BASE_URL = `https://atlas-demo-backend.herokuapp.com`
+const BASE_URL = `http://localhost:3000`
 
 class Map extends React.PureComponent {
   constructor(props){
     super(props)
     this.state = {
-      viewport: {
-        width: "100%", //100% on macbook screen
+      viewport: { //preset map settings on first load
+        width: "100%",
         height: "100vh",
         latitude: 44.5739,
         longitude: 7.7952,
@@ -32,6 +32,7 @@ class Map extends React.PureComponent {
   }
 
   addLayer = (map, countryCodes) => {
+    //highlight countries user has posted on
     map.addLayer({
       'id': 'countries',
       'source': {
@@ -53,7 +54,7 @@ class Map extends React.PureComponent {
   }
 
   handleMarkerClick = (event, longitude, latitude) => {
-    // alert(whichCountry([longitude, latitude]))
+    //when pinned, store latitude/longitude of location on state
     this.setState({
       popupInfo: {
         longitude: longitude,
@@ -64,11 +65,14 @@ class Map extends React.PureComponent {
   }
 
   routeToSearchTrips = (event, routerProps, fullCountryName) => {
+    //transition to countries search page
     routerProps.history.push(`/search_trips/${fullCountryName}`)
   }
 
   renderCountryTrips = () => {
+    //when user clicks on pin, show country name and links to either form page or search page
     let fullCountryName = this.props.countryList.find(country => country.alpha3Code === this.state.popupInfo.alpha3Country).name
+    //get full country name from alpha3code stored in backend
     let filteredTrips = this.props.tripsList.filter(trip => trip.country_name === fullCountryName)
     if(filteredTrips.length === 0){
       return <div>No trips posted for {fullCountryName}. <span className="be-the-first" onClick={(event) => this.routeToForm(event, this.props.router)}>You can be the first!</span></div>
@@ -78,13 +82,16 @@ class Map extends React.PureComponent {
   }
 
   routeToForm = (event, routerProps) => {
+    //transition to form page if no one has posted on this country before
     routerProps.history.push("/form")
   }
+
   closePopup = () => {
     this.setState({popupInfo: null})
   }
 
   renderPopup = () => {
+    //show popup on pin click
     return this.state.popupInfo && (
     <Popup tipSize={10}
       anchor="bottom"
@@ -107,6 +114,7 @@ class Map extends React.PureComponent {
   }
 
   handleDeletePin = (event) => {
+    //delete pin on frontend and backend
     event.preventDefault()
     let longitude = this.state.popupInfo.longitude.toFixed(4)
     let latitude = this.state.popupInfo.latitude.toFixed(4)
@@ -119,6 +127,7 @@ class Map extends React.PureComponent {
   }
 
   deletePinFrontEnd = (pinIdToDelete) => {
+    //delete pin from state
     let newPinnedLocations = [...this.state.pinned_locations]
     let pinIndexToDelete = newPinnedLocations.findIndex(loc => loc.id === pinIdToDelete)
 
@@ -128,6 +137,7 @@ class Map extends React.PureComponent {
 
 
   deletePinBackend = (pinIdToDelete) => {
+    //send delete request to backend
     fetch(`${BASE_URL}/api/v1/pinned_locations/${pinIdToDelete}`, {
       method: "DELETE",
       headers: {
@@ -139,12 +149,15 @@ class Map extends React.PureComponent {
   }
 
   renderMarkers = () => {
+    //show user's pinned countries when map first loads
     return this.state.pinned_locations.length !== 0 && this.state.pinned_locations.map(loc => {
       return <Marker key={loc.id} longitude={parseFloat(loc.longitude)} latitude={parseFloat(loc.latitude)} offsetLeft={-11} offsetTop={-20}><Icon size="large" name="map pin" color="red" onClick={(event) => this.handleMarkerClick(event, parseFloat(loc.longitude), parseFloat(loc.latitude))}/></Marker>
     })
   }
 
   handleMapClick = (event) => {
+    //when user double clicks, add new pin
+    //add new pin info to state 
     this.setState({
       addNewMarker: {
         longitude: event.lngLat[0],
@@ -155,6 +168,7 @@ class Map extends React.PureComponent {
   }
 
   postPinnedLocation = () => {
+    //send pinned location details to backend
     let body = {
       user_id: this.props.signedInUser[0].id,
       longitude: this.state.addNewMarker.longitude,

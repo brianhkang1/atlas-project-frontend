@@ -3,7 +3,7 @@ import {Segment, Form, Button} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { signInUser } from '../redux/actions/signInUser'
 
-const BASE_URL = `https://atlas-demo-backend.herokuapp.com`
+const BASE_URL = `http://localhost:3000`
 
 class Login extends React.PureComponent {
   constructor(props){
@@ -37,11 +37,11 @@ class Login extends React.PureComponent {
       },
       body: JSON.stringify(body)
     }).then(res => res.json())
-      .then(json => {
+      .then(json => { //check if successfully logged in or not
         if(json.message === "Invalid username or password"){
           alert(json.message)
         } else {
-          localStorage.setItem("token", json.jwt)
+          localStorage.setItem("token", json.jwt) //if logged in successfully, set token and transition to index trips page
           this.props.signInUser(json.user)
           routerProps.history.push('/search_trips')
         }

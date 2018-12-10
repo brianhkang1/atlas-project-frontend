@@ -6,7 +6,7 @@ import { Accordion, Icon, Image } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { fetchTrip } from '../redux/actions/fetch_Trip'
 
-const BASE_URL = `https://atlas-demo-backend.herokuapp.com`
+const BASE_URL = `http://localhost:3000`
 
 const sliderSettings = {
   dots: true,
@@ -31,8 +31,7 @@ class TripDetails extends React.Component{
   }
 
   componentDidUpdate(prevProps){
-    console.log("I am updating")
-
+    //this will trigger when user clicks on the like/heart feature
     if((this.props.trip.length !== 0 && this.props.signedInUser.length !== 0) && (this.props.trip !== prevProps.trip || this.props.signedInUser !== prevProps.signedInUser)){
       if(this.props.trip.trip_likers.find(likers => likers.id === this.props.signedInUser[0].id)){
         this.setState({userLikesTrip: true})
@@ -69,6 +68,7 @@ class TripDetails extends React.Component{
   }
 
   handleLikeClick = (event) => {
+    //when user clicks on heart, post new trip_like instance to backend
     let body = {
       trip_liker_id: this.props.signedInUser[0].id,
       liked_trip_id: this.props.tripId
@@ -89,6 +89,7 @@ class TripDetails extends React.Component{
   }
 
   handleUnlikeClick = (event) => {
+    //when user unlikes trip, first get the id of trip_like, then send delete request to backend  
     fetch(`${BASE_URL}/api/v1/trip_likes`)
       .then(res => res.json())
       .then(json => {

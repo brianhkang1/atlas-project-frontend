@@ -2,7 +2,7 @@ import React from 'react'
 import {Segment, Form, Button, Icon, Input} from 'semantic-ui-react'
 import ImageUploader from 'react-images-upload'
 
-const BASE_URL = `https://atlas-demo-backend.herokuapp.com`
+const BASE_URL = `http://localhost:3000`
 
 class TripForm extends React.PureComponent {
   constructor(props){
@@ -17,6 +17,7 @@ class TripForm extends React.PureComponent {
   }
 
   onDrop = (picture) => {
+    //image uploading
     this.setState({pictures: this.state.pictures.concat(picture)})
   }
 
@@ -27,23 +28,27 @@ class TripForm extends React.PureComponent {
   }
 
   handleAddItinerary = () => {
+    //when user clicks on plus button to add days to itinerary
     let arr = [...this.state.itinerary, ""]
     this.setState({itinerary: arr})
   }
 
   handleDeleteItinerary = () => {
+    //when user clicks on minus button to delete days from itinerary
     let arr = [...this.state.itinerary]
     arr.splice(arr.length-1, 1)
     this.setState({itinerary: arr})
   }
 
   handleItineraryChange = (index, newValue) => {
+    //add itinerary details to state
     const updatedArray = [...this.state.itinerary];
     updatedArray[index] = newValue
     this.setState({itinerary: updatedArray});
   }
 
   handleLocationChange = (index, newValue) => {
+    //add itinerary location to state
     const updatedArray = [...this.state.locations];
     updatedArray[index] = newValue
     this.setState({locations: updatedArray});
@@ -51,17 +56,20 @@ class TripForm extends React.PureComponent {
 
   handleSubmit = (event, routerProps) => {
     event.preventDefault()
+    //check if country is legit first
     if(this.props.countryList.find(country => country.name.toLowerCase() === this.state.country.toLowerCase())){
       this.postToTrips(routerProps)
     } else {alert("Please choose a valid country")}
   }
 
   postToTrips = (routerProps) => {
+    //itinerary locations are sent in one bundle; separated by "&&&"
     let loc = [...this.state.locations]
     for (let i = 0; i < loc.length - 1; i++){
       loc[i] = loc[i] + "&&&"
     }
 
+    //itinerary details are sent in one bundle; separated by "&&&"
     let iti = [...this.state.itinerary]
     for (let i = 0; i < iti.length - 1; i++){
       iti[i] = iti[i] + "&&&"
