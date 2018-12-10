@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+IMPORTANT NOTE: this is the front-end portion of the Atlas project-- you will need to first run the backend end server (https://github.com/brianhkang1/atlas-project-backend) before "npm start"
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -7,7 +9,7 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.<br>
-Open [http://http://localhost:3000](http://http://localhost:3000) to view it in the browser.
+Open [http://http://localhost:3001](http://http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
